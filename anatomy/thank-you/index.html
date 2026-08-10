@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In! Anatomy of a Hit Song</title>
+<style>
+  :root {
+    --ink: #12142b;
+    --ink-soft: #4a4d6b;
+    --cyan: #0d95c2;
+    --cyan-bg: #e8f6fc;
+    --orange: #e2703a;
+    --white: #ffffff;
+    --card-bg: #f6f7fb;
+    --border: #e3e5f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 56px 24px 32px;
+    text-align: center;
+  }
+  .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--cyan-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .check svg { width: 26px; height: 26px; }
+  h1 {
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .confirm {
+    font-size: 21px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .spam {
+    font-size: 15px;
+    color: #9a9db8;
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+  .wrap p {
+    text-align: left;
+    font-size: 19px;
+    color: #2b2d47;
+    margin-bottom: 18px;
+  }
+  .pivot {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: center;
+    margin: 36px 0 28px;
+  }
+  .offer-intro {
+    text-align: left;
+  }
+  .offer-intro .hl { color: var(--cyan); font-weight: 700; }
+  .proof-photo {
+    width: 220px;
+    height: auto;
+    border-radius: 12px;
+    float: right;
+    margin: 0 0 16px 20px;
+  }
+  .arrow-list {
+    list-style: none;
+    text-align: left;
+    margin: 24px 0 8px;
+    clear: both;
+  }
+  .arrow-list li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: #2b2d47;
+  }
+  .arrow-list li::before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .mechanism {
+    text-align: left;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .price-line {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .price-line .stat { color: var(--cyan); }
+  .you-in {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 20px 0 24px;
+  }
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 19px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease;
+    margin-bottom: 32px;
+  }
+  .cta-btn:hover {
+    opacity: 0.92;
+    box-shadow: 0 6px 16px rgba(226,112,58,0.35);
+  }
+  .product-shot {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 40px;
+    border-radius: 12px;
+    display: block;
+  }
+  .product-shot-placeholder {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 40px;
+    padding: 40px 20px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    color: #9a9db8;
+    font-size: 13px;
+    text-align: center;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin-top: 12px;
+    text-align: left;
+  }
+  footer p {
+    text-align: left;
+    font-size: 13px;
+    color: #8b8eaa;
+    margin-bottom: 10px;
+  }
+  footer a { color: var(--ink-soft); text-decoration: underline; }
+  .foot-links { font-size: 13px; color: #8b8eaa; margin-bottom: 6px; text-align: center; }
+  @media (max-width: 480px) {
+    h1 { font-size: 31px; }
+    .wrap { padding: 40px 18px 24px; }
+    .proof-photo { width: 100%; float: none; margin: 0 0 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="check">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 6L9 17l-5-5" stroke="#0d95c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h1>You&rsquo;re in.</h1>
+  <p class="confirm">Anatomy of a Hit Song is on its way to your inbox right now.</p>
+  <p class="spam">(Check your spam folder if you don&rsquo;t see it in a few minutes.)</p>
+
+  <div class="eyebrow">While you wait...</div>
+
+  <p>The guide breaks down why a song like &ldquo;It Wasn&rsquo;t Me&rdquo; connects with a room full of strangers. The chorus-first structure. The hook that gets stuck. The bridge that earns its spot.</p>
+
+  <p>Here&rsquo;s the problem: knowing why a hit works and building one of your own are two completely different skills.</p>
+
+  <p>Generating an idea worth chasing. Writing a melody that actually sticks. Finishing something that sounds like it belongs on the radio, instead of a voice memo on your phone. Nobody teaches you that part.</p>
+
+  <p class="pivot">Want to skip the part where you guess for years like I did?</p>
+
+  <img class="proof-photo" src="../assets/rikrok-photo.png" alt="Rikrok, performer and songwriter, co-writer of &quot;It Wasn't Me&quot;">
+
+  <p class="offer-intro"><span class="hl">Chorus First Songwriting</span> is the course I wish existed before &ldquo;It Wasn&rsquo;t Me.&rdquo; It takes everything in the guide and turns it into songs you actually finish.</p>
+
+  <ul class="arrow-list">
+    <li>The real rules behind a hit, the ones that got &ldquo;It Wasn&rsquo;t Me&rdquo; to 1.6 billion streams, a #1 on the Billboard Hot 100, and a Super Bowl commercial</li>
+    <li>A repeatable way to generate ideas and write melodies that hold up past the first listen</li>
+    <li>A simple home studio setup so what you write actually gets recorded, not stuck in your voice memos</li>
+  </ul>
+
+  <p class="mechanism">It&rsquo;s prerecorded video modules you work through at your own pace, each one with downloadable resources, shopping lists, and the exact tools I recommend.</p>
+
+  <p class="price-line"><span class="stat">$297.</span> Self-paced. Built to get you from idea to finished song.</p>
+
+  <p class="you-in">You in?</p>
+
+  <a class="cta-btn" href="http://go.gigfanatic.com/chorus-first">Yes, Give Me The System</a>
+
+  <img class="product-shot" src="../assets/course-mockup.png" alt="Chorus First Songwriting course mockup">
+
+  <footer>
+    <p>This page is not part of the Instagram website or Instagram Inc. Additionally, this site is NOT endorsed by Instagram or Meta in any way. INSTAGRAM is a trademark of Meta Platforms, Inc.</p>
+    <p>Results aren&rsquo;t typical. What you get out of Chorus First Songwriting depends on your background, your work ethic, and how much time you actually put into the modules. I&rsquo;m sharing the system that worked for me. I can&rsquo;t promise it&rsquo;ll land you a placement or a hit record.</p>
+    <div class="foot-links"><a href="https://gigfanatic.com/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://gigfanatic.com/terms">Terms &amp; Conditions</a></div>
+    <div class="foot-links">&copy; 2026 GigFanatic. All rights reserved.</div>
+  </footer>
+
+</div>
+</body>
+</html>
