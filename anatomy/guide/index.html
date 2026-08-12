@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy of a Hit Song</title>
+<style>
+  :root {
+    --ink: #12142b;
+    --ink-soft: #4a4d6b;
+    --cyan: #0d95c2;
+    --cyan-bg: #e8f6fc;
+    --orange: #e2703a;
+    --white: #ffffff;
+    --card-bg: #f6f7fb;
+    --border: #e3e5f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 56px;
+  }
+  .badge {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .sub {
+    font-size: 20px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  p { margin-bottom: 18px; font-size: 19px; color: #2b2d47; }
+  .stat-line { color: var(--cyan); font-weight: 700; }
+  h2 {
+    font-size: 26px;
+    margin: 44px 0 16px;
+    color: var(--ink);
+  }
+  h3 {
+    font-size: 20px;
+    margin: 28px 0 10px;
+    color: var(--ink);
+    font-weight: 800;
+  }
+  ul.check-list { list-style: none; margin: 0 0 8px; }
+  ul.check-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 14px;
+    font-size: 18px;
+    color: #2b2d47;
+  }
+  ul.check-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+  ul.check-list li::after {
+    content: "\2713";
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    font-size: 12px;
+    color: var(--white);
+    font-weight: 700;
+  }
+  .do-this {
+    background: var(--card-bg);
+    border-left: 3px solid var(--cyan);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 0 0 28px;
+  }
+  .do-this p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 0;
+  }
+  .do-this .label {
+    color: var(--cyan);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 6px;
+  }
+  ol.recap-list {
+    list-style: none;
+    counter-reset: recap;
+    margin: 0 0 8px;
+  }
+  ol.recap-list li {
+    counter-increment: recap;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: #2b2d47;
+  }
+  ol.recap-list li::before {
+    content: counter(recap);
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    line-height: 26px;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+  .closing {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 8px;
+    margin-bottom: 18px;
+  }
+  .cta-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .cta-box p {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 28px;
+    border: none;
+    border-radius: 8px;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta-btn:hover {
+    opacity: 0.92;
+    box-shadow: 0 6px 16px rgba(226,112,58,0.35);
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 40px;
+  }
+  footer p {
+    font-size: 13px;
+    color: #8b8eaa;
+    margin-bottom: 10px;
+  }
+  footer a { color: var(--ink-soft); text-decoration: underline; }
+  .foot-links { font-size: 13px; color: #8b8eaa; margin-bottom: 6px; }
+  @media (max-width: 480px) {
+    h1 { font-size: 30px; }
+    .wrap { padding: 32px 18px 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="badge">The Guide</div>
+  <h1>Anatomy of a Hit Song</h1>
+  <p class="sub">What &ldquo;It Wasn&rsquo;t Me&rdquo; can teach you about writing songs people actually want to hear.</p>
+
+  <p>&ldquo;It Wasn&rsquo;t Me&rdquo; has been streamed over <span class="stat-line">1.6 billion times</span>, and it&rsquo;s still getting played 26 years after its original release in 2000. It blows my mind to think that I co-wrote it, but more importantly, as much as I&rsquo;d love to say we (the songwriters) brilliantly crafted it to become the massive hit it did, the unfiltered truth is that we didn&rsquo;t plan any of that. We just got some very important fundamentals right &mdash; mostly by accident.</p>
+
+  <h2>How I even got there</h2>
+  <p>I started out writing songs as a hobby, same as most of you probably did. When I decided I wanted to turn it into an actual career, I struggled for years. I didn&rsquo;t know how to connect the dots between being an unknown, broke songwriter and earning a full-time living from songs I&rsquo;d co-written.</p>
+  <p>Then a mutual friend introduced me to Shaggy. I ended up writing hundreds of songs with him. A handful of those songs changed my career and, honestly, changed my life. &ldquo;It Wasn&rsquo;t Me&rdquo; was one of them.</p>
+
+  <h2>Here&rsquo;s the problem</h2>
+  <p>We didn&rsquo;t write it because we&rsquo;d cracked some formula. We wrote it because we thought it was funny, and we figured other people would too. That was the whole plan. Truth be told, if you&rsquo;d asked us beforehand why it was going to work, neither of us could&rsquo;ve told you.</p>
+  <p>Then it blew up:</p>
+  <ul class="check-list">
+    <li>#1 on the Billboard Hot 100</li>
+    <li>Multi-platinum in the US, platinum in the UK</li>
+    <li>Streamed over 1.6 billion times and counting</li>
+    <li>Pushed the album past 10 million copies sold and to #1 on the Billboard album chart too</li>
+    <li>Sampled by Liam Payne in &ldquo;Strip That Down,&rdquo; with us credited as cowriters</li>
+    <li>Reworked into &ldquo;China,&rdquo; a Spanish-language version that hit #1 across Latin markets</li>
+    <li>Featured in a Super Bowl commercial for Cheetos with Ashton Kutcher, Mila Kunis, and Shaggy</li>
+    <li>Took us onto some of the biggest stages in the world: Madison Square Garden for Michael Jackson&rsquo;s 30th Anniversary tribute show, opening for the Rolling Stones, a run on the Backstreet Boys&rsquo; US tour, and TV spots on Leno, Letterman, SNL, Queen Latifah, Top of the Pops, and the Brits</li>
+  </ul>
+  <p>I say all that not to brag, but because of what happened next.</p>
+
+  <h2>The wall</h2>
+  <p>I tried to repeat it on purpose. I wrote plenty of songs after that one, and none of them hit the way it did. I hadn&rsquo;t actually cracked anything. I&rsquo;d gotten lucky, and I didn&rsquo;t know it yet.</p>
+  <p>That&rsquo;s the real problem for most songwriters, including the version of me back then. You can write something that connects once and still have no idea why, which means you have no idea how to do it again.</p>
+
+  <h2>The quest</h2>
+  <p>That failure is what sent me looking for the real, repeatable mechanics behind why a song connects. It took years, but it turned into a deliberate process I now call Chorus First Songwriting.</p>
+  <p>Here&rsquo;s what I found when I finally sat down and studied that song properly, and what you can actually do with each piece of it.</p>
+
+  <h2>The teardown</h2>
+
+  <h3>The beat came from watching a crowd, not guessing at one.</h3>
+  <p>The producer on this song was a working club DJ. He built the instrumental around tempo and sounds he&rsquo;d already watched partygoers react to on a real dance floor, night after night. He wasn&rsquo;t guessing what people liked. He&rsquo;d already seen it happen. That&rsquo;s also what made the beat the right foundation for an infectious melody &mdash; it had room built into it for a vocal hook to sit on top and take over.</p>
+  <div class="do-this">
+    <span class="label">Do this</span>
+    <p>Before you write a single lyric, test your instrumental on its own, no vocals, against a real reaction. Play it for people and watch what their bodies do. If nothing moves, fix the beat before you touch the lyrics.</p>
+  </div>
+
+  <h3>The chorus is the anchor. Everything else is allowed to drift a little &mdash; the chorus isn&rsquo;t.</h3>
+  <p>It&rsquo;s the part that keeps the whole song from floating off into nothing. It has to be solid. It has to be instantly memorable. And it has to be obvious &mdash; if someone hears your song once and can&rsquo;t tell you what the chorus is without you pointing it out, it&rsquo;s not ready. You should spend more time on your chorus than on every other part of the song combined. Get it right and your odds jump. Get it wrong and you&rsquo;ve already lost, no matter how good the verses are.</p>
+  <p>&ldquo;It Wasn&rsquo;t Me&rdquo; opens with the chorus. That&rsquo;s the whole strategy: it tells you exactly what the song is about before a single verse gets a chance to bury the point.</p>
+  <div class="do-this">
+    <span class="label">Do this</span>
+    <p>Write your chorus before you write your verses, or at minimum, finish its melody before you touch anything else. Then run the test above &mdash; play it once for someone and ask them to sing it back immediately. If they can&rsquo;t, go back to the chorus. Don&rsquo;t move forward until it passes.</p>
+  </div>
+
+  <h3>The verses exist to make the chorus feel like the payoff.</h3>
+  <p>They&rsquo;re placed melodically lower-key than the chorus on purpose, so the chorus lands like a release every time it hits. They also carry the story that the chorus already introduced. The two jobs work together &mdash; the verses make the chorus feel earned, and the chorus makes the verses feel like they&rsquo;re building toward something.</p>
+  <div class="do-this">
+    <span class="label">Do this</span>
+    <p>Once your chorus is done, write verses that are simpler and calmer than it, melodically. If your verse is as catchy as your chorus, your chorus won&rsquo;t stand out when it arrives, and that&rsquo;s the one job it can&rsquo;t fail at.</p>
+  </div>
+
+  <h3>The hook is built to be sung by everyone, even if not every line is understood by everyone.</h3>
+  <p>Shaggy&rsquo;s verses are in Jamaican Patois, genuinely hard to follow if you didn&rsquo;t grow up hearing it. It still works, because the chorus is where the song actually lives &mdash; easy to sing along to, melodic, impossible to miss. My verses are simple and singable, so there&rsquo;s always a way in for someone who wants to join.</p>
+  <p>You can watch this exact principle playing out right now with Afrobeats. It&rsquo;s exploded across English-speaking markets over the past several years, and a lot of the biggest songs in that wave aren&rsquo;t mostly in English at all. What travels is a strong English chorus, verse melodies that set it up as the obvious climax, and production that puts you in a good mood the second it starts. Nobody needs to understand every word to know exactly what the song is about.</p>
+  <div class="do-this">
+    <span class="label">Do this</span>
+    <p>You don&rsquo;t need every word of your song to be universally understood. You need the part everyone sings to be universally singable. Find the one moment that carries the song, and make that specific moment dead simple, even if you let other parts carry more personality or flavor.</p>
+  </div>
+
+  <h3>It has a real bridge.</h3>
+  <p>A lot of songs skip one these days. This one&rsquo;s bridge is held to the same standard as the chorus &mdash; melodic, easy to sing &mdash; so it adds a second wave instead of feeling like a detour.</p>
+  <div class="do-this">
+    <span class="label">Do this</span>
+    <p>If you include a bridge, don&rsquo;t treat it as filler. Hold it to the same bar as your chorus, or cut it.</p>
+  </div>
+
+  <hr class="divider">
+
+  <h2>Quick recap</h2>
+  <p>Before you go write your own, here&rsquo;s the process in order:</p>
+  <ol class="recap-list">
+    <li>Test your beat on its own, no lyrics, against a real reaction.</li>
+    <li>Write and lock your chorus before anything else. Solid, memorable, obvious.</li>
+    <li>Build your verses calmer than the chorus, so the chorus lands like a payoff.</li>
+    <li>Make the one moment everyone sings dead simple, even if other parts carry more flavor.</li>
+    <li>Hold your bridge to the same bar as your chorus, or cut it.</li>
+  </ol>
+
+  <h2>What this means for you</h2>
+  <p>Picture finishing a song and playing it for someone who&rsquo;s never heard it. Somewhere around the second time the chorus comes back, they&rsquo;re already singing it, without you asking them to. That&rsquo;s not a fluke when it happens. It&rsquo;s a sign the chorus did its job.</p>
+  <p>That&rsquo;s what&rsquo;s actually available to you here: writing with an actual sense, before you ever play it for anyone, of whether a song has a shot. Walking into a writing session, a manager&rsquo;s office, or a stage, knowing the chorus can carry the room instead of hoping it does.</p>
+  <p>That&rsquo;s the difference between chasing a career in music and building one &mdash; between one lucky song and a body of work people can&rsquo;t stop singing back to you. It&rsquo;s what turns &ldquo;I write songs sometimes&rdquo; into &ldquo;this is what I do for a living.&rdquo;</p>
+  <p class="closing">I got there by accident once, then spent years figuring out how to do it on purpose. Chorus First Songwriting is that process, laid out step by step, so you don&rsquo;t need the accident first.</p>
+
+  <div class="cta-box">
+    <p>If you want the full process, that&rsquo;s where to go next.</p>
+    <a class="cta-btn" href="http://go.gigfanatic.com/chorus-first">Get Chorus First Songwriting &#8594;</a>
+  </div>
+
+  <footer>
+    <p>This page is not part of the Instagram website or Instagram Inc. Additionally, this site is NOT endorsed by Instagram or Meta in any way. INSTAGRAM is a trademark of Meta Platforms, Inc.</p>
+    <p>Results aren&rsquo;t typical. What you get out of Chorus First Songwriting depends on your background, your work ethic, and how much time you actually put into the modules. I&rsquo;m sharing the system that worked for me. I can&rsquo;t promise it&rsquo;ll land you a placement or a hit record.</p>
+    <div class="foot-links"><a href="https://gigfanatic.com/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://gigfanatic.com/terms">Terms &amp; Conditions</a></div>
+    <div class="foot-links">&copy; 2026 GigFanatic. All rights reserved.</div>
+  </footer>
+
+</div>
+</body>
+</html>
