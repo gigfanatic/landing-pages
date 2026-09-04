@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>The Missing Step Quiz</title>
+<style>
+  :root {
+    --ink: #12142b;
+    --ink-soft: #4a4d6b;
+    --cyan: #0d95c2;
+    --cyan-bg: #e8f6fc;
+    --orange: #e2703a;
+    --white: #ffffff;
+    --card-bg: #f6f7fb;
+    --border: #e3e5f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
+  }
+  .badge {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  h1 .hl { color: var(--cyan); }
+  .sub {
+    font-size: 20px;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .hero {
+    margin-bottom: 32px;
+  }
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+  .hero-cta:hover {
+    opacity: 0.92;
+    box-shadow: 0 6px 16px rgba(226,112,58,0.35);
+  }
+  .hero-cta .arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .hero-cta:hover .arrow {
+    animation: arrow-bounce 0.9s ease infinite;
+  }
+  @keyframes arrow-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+  .proof-photo {
+    width: 200px;
+    height: auto;
+    border-radius: 12px;
+    float: right;
+    margin: 0 0 16px 24px;
+  }
+  .proof-clear {
+    clear: both;
+  }
+  @media (max-width: 480px) {
+    .proof-photo { width: 140px; float: right; margin: 0 0 12px 16px; }
+  }
+  p { margin-bottom: 18px; font-size: 19px; color: #2b2d47; }
+  .stat-line { color: var(--cyan); font-weight: 700; }
+  h2 {
+    font-size: 24px;
+    margin: 36px 0 16px;
+    color: var(--ink);
+  }
+  ul.check-list { list-style: none; margin-bottom: 8px; }
+  ul.check-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 14px;
+    font-size: 18px;
+    color: #2b2d47;
+  }
+  ul.check-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--cyan);
+  }
+  ul.check-list li::after {
+    content: "\2713";
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    font-size: 12px;
+    color: var(--white);
+    font-weight: 700;
+  }
+  ul.check-list.orange li::before { background: var(--orange); }
+  .closing {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 32px;
+    margin-bottom: 6px;
+  }
+  .cta-lead {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .quiz-embed {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .quiz-embed .fillout-frame {
+    width: 100%;
+    min-height: 520px;
+    border: none;
+  }
+  .quiz-subtext {
+    font-size: 14px;
+    color: #8b8eaa;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 12px;
+  }
+  footer p {
+    font-size: 13px;
+    color: #8b8eaa;
+    margin-bottom: 10px;
+  }
+  footer a { color: var(--ink-soft); text-decoration: underline; }
+  .foot-links { font-size: 13px; color: #8b8eaa; margin-bottom: 6px; }
+  @media (max-width: 480px) {
+    h1 { font-size: 30px; }
+    .wrap { padding: 32px 18px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="badge">For the songwriter doing everything right and still not landing</div>
+  <h1>The One Step Separating Songs That <span class="hl">Land</span> From Songs That Don't</h1>
+  <p class="sub">Six honest questions about how you actually write. Two minutes, then a personal read on exactly where your process breaks down.</p>
+
+  <div class="hero">
+    <a class="hero-cta" href="javascript:void(0);" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'});">Take The 2-Minute Quiz (Free) <span class="arrow">↓</span></a>
+  </div>
+
+  <p>You've written songs you were proud of. Then you watched someone else's average song do better than your best one, and couldn't explain why.</p>
+
+  <p>That gap comes down to one step in your process, done out of order or skipped entirely, not a difference in talent. Most songwriters never find out which one.</p>
+
+  <img class="proof-photo" src="assets/rikrok-photo.png" alt="Rikrok, performer and songwriter, co-writer of &quot;It Wasn't Me&quot;">
+
+  <p>I co-wrote <span class="stat-line">"It Wasn't Me"</span> with Shaggy — 1.6 billion streams, two #1 Hot 100 singles, a #1 Billboard 200 album. That happened because I found the one step I'd been skipping and fixed it, not because I suddenly got better at writing lyrics.</p>
+
+  <p class="proof-clear">This quiz runs your current process against that same structure, then tells you exactly which step is costing you.</p>
+
+  <h2>This is for you if</h2>
+  <ul class="check-list">
+    <li>You finish songs and can't explain why some land and others don't</li>
+    <li>You've never written down your actual process, you just start writing</li>
+    <li>You get inconsistent reactions to songs you worked equally hard on</li>
+    <li>You're about to start a new song and want to know what to fix before you write it</li>
+  </ul>
+
+  <h2>What's inside</h2>
+  <ul class="check-list orange">
+    <li>6 questions about your real songwriting process, not songwriting theory</li>
+    <li>An honest read on how you currently write, with no right or wrong answers</li>
+    <li>A personalized two-part breakdown of the kind of songwriter you are right now</li>
+    <li>The exact step in your process that's holding you back right now</li>
+    <li>Takes under 2 minutes, results shown instantly</li>
+  </ul>
+
+  <p class="closing">You already have a process. You've just never tested it.</p>
+  <p class="cta-lead">Take the quiz and find out which step it's missing.</p>
+
+  <div class="quiz-embed" id="quiz">
+    <div class="fillout-frame" data-fillout-id="4UKXPYpahpus" data-fillout-embed-type="standard" data-fillout-inherit-parameters="" data-fillout-dynamic-resize=""></div>
+  </div>
+  <p class="quiz-subtext">Free, takes about 2 minutes, and your results show instantly.</p>
+  <script src="https://server.fillout.com/embed/v1/"></script>
+
+  <footer>
+    <p>This site is not part of the Instagram or Meta website, and is not endorsed by Instagram or Meta in any way.</p>
+    <p>Disclaimer: The results referenced on this page are real but not a guarantee of your results. Success depends on your background, effort, and work ethic. This quiz provides a personalized read on your current process. What you do with it is up to you.</p>
+    <div class="foot-links"><a href="https://gigfanatic.com/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://gigfanatic.com/terms">Terms &amp; Conditions</a></div>
+    <div class="foot-links">© 2026 GigFanatic. All rights reserved.</div>
+  </footer>
+
+</div>
+</body>
+</html>
