@@ -88,8 +88,8 @@
     animation: arrow-bounce 0.9s ease infinite;
   }
   @keyframes arrow-bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
   }
   .proof-photo {
     width: 200px;
@@ -151,19 +151,6 @@
     color: var(--ink-soft);
     margin-bottom: 24px;
   }
-  .quiz-embed {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 12px;
-    overflow: hidden;
-  }
-  .quiz-embed .fillout-frame {
-    width: 100%;
-    min-height: 520px;
-    border: none;
-  }
   .quiz-subtext {
     font-size: 14px;
     color: #8b8eaa;
@@ -196,7 +183,7 @@
   <p class="sub">Six honest questions about how you actually write. Two minutes, then a personal read on exactly where your process breaks down.</p>
 
   <div class="hero">
-    <a class="hero-cta" href="javascript:void(0);" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'});">Take The 2-Minute Quiz (Free) <span class="arrow">↓</span></a>
+    <a class="hero-cta" href="javascript:void(0);" data-fillout-id="4UKXPYpahpus" data-fillout-embed-type="popup" data-fillout-popup-size="medium" data-fillout-inherit-parameters data-fillout-dynamic-resize>Take The 2-Minute Quiz (Free) <span class="arrow">→</span></a>
   </div>
 
   <p>You've written songs you were proud of. Then you watched someone else's average song do better than your best one, and couldn't explain why.</p>
@@ -229,8 +216,8 @@
   <p class="closing">You already have a process. You've just never tested it.</p>
   <p class="cta-lead">Take the quiz and find out which step it's missing.</p>
 
-  <div class="quiz-embed" id="quiz">
-    <div class="fillout-frame" data-fillout-id="4UKXPYpahpus" data-fillout-embed-type="standard" data-fillout-inherit-parameters="" data-fillout-dynamic-resize=""></div>
+  <div class="hero">
+    <a class="hero-cta" href="javascript:void(0);" data-fillout-id="4UKXPYpahpus" data-fillout-embed-type="popup" data-fillout-popup-size="medium" data-fillout-inherit-parameters data-fillout-dynamic-resize>Take The 2-Minute Quiz (Free) <span class="arrow">→</span></a>
   </div>
   <p class="quiz-subtext">Free, takes about 2 minutes, and your results show instantly.</p>
   <script src="https://server.fillout.com/embed/v1/"></script>
