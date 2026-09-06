@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>The Missing Step Quiz</title>
+<style>
+  :root {
+    --ink: #12142b;
+    --ink-soft: #4a4d6b;
+    --cyan: #0d95c2;
+    --cyan-bg: #e8f6fc;
+    --orange: #e2703a;
+    --white: #ffffff;
+    --card-bg: #f6f7fb;
+    --border: #e3e5f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 32px;
+  }
+
+  /* ---- progress bar ---- */
+  .progress-shell {
+    display: none;
+    margin-bottom: 28px;
+  }
+  .progress-shell.active { display: block; }
+  .progress-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--cyan);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  /* ---- screens ---- */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .badge {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: 34px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  h1 .hl { color: var(--cyan); }
+  .sub {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  p { margin-bottom: 18px; font-size: 19px; color: #2b2d47; }
+
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    font-family: inherit;
+  }
+  .cta-btn:hover { opacity: 0.92; box-shadow: 0 6px 16px rgba(226,112,58,0.35); }
+  .cta-btn .arrow { display: inline-block; transition: transform 0.2s ease; }
+  .cta-btn:hover .arrow { animation: arrow-bounce 0.9s ease infinite; }
+  @keyframes arrow-bounce { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+  .cta-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .cta-btn:disabled:hover { box-shadow: none; }
+
+  /* ---- question choices ---- */
+  .question-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 22px;
+    line-height: 1.35;
+  }
+  .choice-list { list-style: none; margin-bottom: 8px; }
+  .choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--card-bg);
+    color: var(--ink);
+    font-size: 17px;
+    font-family: inherit;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .choice:hover { border-color: var(--cyan); background: var(--cyan-bg); }
+  .choice.selected { border-color: var(--cyan); background: var(--cyan-bg); }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  /* ---- email capture form ---- */
+  .field-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .field-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 17px;
+    font-family: inherit;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .field-input:focus { outline: none; border-color: var(--cyan); }
+  .field-error {
+    display: none;
+    color: var(--orange);
+    font-size: 14px;
+    margin: -12px 0 16px;
+  }
+  .field-error.active { display: block; }
+
+  /* ---- results ---- */
+  .results-intro {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+  .result-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 20px;
+  }
+  .result-card .result-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+  .result-card p { font-size: 18px; margin-bottom: 0; }
+  .closing {
+    font-size: 19px;
+    color: #2b2d47;
+    margin-top: 28px;
+  }
+  .closing strong { color: var(--ink); }
+
+  .quiz-subtext {
+    font-size: 14px;
+    color: #8b8eaa;
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 40px;
+  }
+  footer p { font-size: 13px; color: #8b8eaa; margin-bottom: 10px; }
+  footer a { color: var(--ink-soft); text-decoration: underline; }
+  .foot-links { font-size: 13px; color: #8b8eaa; margin-bottom: 6px; }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .question-title { font-size: 21px; }
+    .wrap { padding: 32px 18px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="progress-shell" id="progressShell">
+    <div class="progress-label" id="progressLabel">Question 1 of 6</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <!-- Welcome -->
+  <section class="screen active" id="screen-welcome">
+    <div class="badge">For the songwriter doing everything right and still not landing</div>
+    <h1>Run This Before You Write <span class="hl">Another Song</span></h1>
+    <p class="sub">Six quick questions about how you actually write, not how you think you write. Answer honestly, and you'll get a real read on the kind of songwriter you are right now.</p>
+    <button class="cta-btn" type="button" onclick="goTo('q1')">Start The Quiz <span class="arrow">→</span></button>
+    <p class="quiz-subtext">Free, takes about 2 minutes, and your results show instantly.</p>
+  </section>
+
+  <!-- Questions get injected here -->
+  <div id="questions-mount"></div>
+
+  <!-- Email capture -->
+  <section class="screen" id="screen-email">
+    <h2 class="question-title">Your results are ready.</h2>
+    <p style="font-size:17px;">Enter your name and email and I'll show you exactly what your songwriting process reveals about you right now.</p>
+    <form id="emailForm" onsubmit="return handleEmailSubmit(event)">
+      <label class="field-label" for="firstName">First name</label>
+      <input class="field-input" type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+      <div class="field-error" id="nameError">Enter your first name.</div>
+
+      <label class="field-label" for="emailAddress">Email address</label>
+      <input class="field-input" type="email" id="emailAddress" name="emailAddress" autocomplete="email" required>
+      <div class="field-error" id="emailError">Enter a valid email address.</div>
+
+      <button class="cta-btn" type="submit" id="submitBtn">See My Results <span class="arrow">→</span></button>
+    </form>
+    <button class="back-link" type="button" onclick="goTo('q6')">← Back</button>
+  </section>
+
+  <!-- Results -->
+  <section class="screen" id="screen-results">
+    <div class="badge">Your Songwriter Profile</div>
+    <p class="results-intro">Here's what your answers say about the kind of songwriter you are right now.</p>
+
+    <div class="result-card">
+      <div class="result-label">Your Creative Process</div>
+      <p id="resultParagraph1"></p>
+    </div>
+
+    <div class="result-card">
+      <div class="result-label">Your Execution &amp; Reactions</div>
+      <p id="resultParagraph2"></p>
+    </div>
+
+    <p class="closing">That's the songwriter you are right now: what's working, what's getting in the way, and probably why some rooms respond and others don't.</p>
+    <p class="closing"><strong>Chorus First Songwriting</strong> walks through exactly how to fix what's not working. It's the same approach behind the songs I co-wrote with Shaggy, including "It Wasn't Me": 1.6B+ streams, two #1 Hot 100 singles, a #1 Billboard 200 album.</p>
+    <p class="closing" style="font-weight:700;">Want the full breakdown of what to change and how?</p>
+
+    <a class="cta-btn" href="https://go.gigfanatic.com/chorus-first">Show Me The System <span class="arrow">→</span></a>
+  </section>
+
+  <footer>
+    <p>This site is not part of the Instagram or Meta website, and is not endorsed by Instagram or Meta in any way.</p>
+    <p>Disclaimer: The results referenced on this page are real but not a guarantee of your results. Success depends on your background, effort, and work ethic. This quiz provides a personalized read on your current process. What you do with it is up to you.</p>
+    <div class="foot-links"><a href="https://gigfanatic.com/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://gigfanatic.com/terms">Terms &amp; Conditions</a></div>
+    <div class="foot-links">© 2026 GigFanatic. All rights reserved.</div>
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================================
+   CONFIG — GoHighLevel Inbound Webhook trigger URL.
+   Posts straight to a GHL workflow (Inbound Webhook trigger) which
+   creates/updates the contact and enrolls them in the welcome sequence.
+   No Pabbly in the middle anymore.
+   Leaving it blank still lets the quiz run and show results — it just
+   won't send anything to GoHighLevel until this is filled in.
+   ========================================================================= */
+const INBOUND_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/KKRiBSNESqko1Du2FqCH/webhook-trigger/2dcd0416-220d-4b6c-8401-2eb5e7422a34"; // <-- GHL Inbound Webhook trigger ("Missing Step Quiz -> GHL")
+
+const QUESTIONS = [
+  {
+    id: "q1",
+    title: "When you sit down to write a song, who are you writing it for?",
+    options: [
+      { text: "I try not to limit my audience by writing too specifically for one type of listener",
+        sentence: "You write for whoever the song might reach, rather than one specific kind of listener." },
+      { text: "A specific kind of listener I could actually describe in a fair amount of detail",
+        sentence: "You know exactly who you're writing for, right down to the kind of listener you're picturing." },
+      { text: "If it's honest and it's good, the right people will eventually find it",
+        sentence: "You write mostly for yourself, trusting that the right people will find the song if it's honest and good." },
+      { text: "I write toward whatever a platform's algorithm is rewarding that week",
+        sentence: "You shape what you write around whatever a given platform's algorithm happens to be rewarding that week." }
+    ]
+  },
+  {
+    id: "q2",
+    title: "How much does the popular music of the day influence your own songwriting?",
+    options: [
+      { text: "I want my sound to come from me, not from what's already out there",
+        sentence: "You keep your sound coming from you, not from what's already out there." },
+      { text: "A popular song might spark an idea here and there, but that's about it",
+        sentence: "You let a popular song spark an idea now and then, but rarely go deeper than that." },
+      { text: "I use popular songs as a blueprint to inform my own songwriting",
+        sentence: "You treat popular songs as a blueprint, pulling from what's already working instead of ignoring it." },
+      { text: "I try to replicate whatever's trending as closely as I can",
+        sentence: "You lean hard on whatever's trending, often sticking close to it instead of using it as a starting point." }
+    ]
+  },
+  {
+    id: "q3",
+    title: "What does the start of your songwriting process usually look like?",
+    options: [
+      { text: "I brainstorm a handful of melody ideas first and pick the one that feels strongest before writing anything else",
+        sentence: "You brainstorm a handful of melody ideas before you start writing and pick the strongest one." },
+      { text: "I usually run with the first idea that shows up and see where it goes",
+        sentence: "You run with the first idea that shows up instead of weighing your options." },
+      { text: "I never try to force ideas. I just wait until the inspiration strikes and go wherever it takes me",
+        sentence: "You wait for inspiration to strike on its own rather than sitting down to generate ideas on purpose." },
+      { text: "I start writing lyrics and melody at the same time and shape the idea as I go",
+        sentence: "You write lyrics and melody at the same time, shaping the idea as you go rather than settling on it first." },
+      { text: "I write words first and figure out melody after",
+        sentence: "You write the words first and figure out the melody afterward." }
+    ]
+  },
+  {
+    id: "q4",
+    title: "Which part of the song do you typically nail down first, before moving on to the rest?",
+    options: [
+      { text: "I usually start with verse one and build from there",
+        sentence: "You build the song in order, starting with verse one." },
+      { text: "I get a chorus idea going, but I move on to other parts before it's fully locked in",
+        sentence: "You'll get a chorus idea going, but you move on to the rest of the song before it's fully locked in." },
+      { text: "I write whichever section I feel most inspired by in the moment, could be a verse, bridge, or chorus",
+        sentence: "You write whatever section you feel most drawn to in the moment, whether that's a verse, a bridge, or the chorus." },
+      { text: "I write the chorus first and don't move on to anything else until it feels complete",
+        sentence: "You write the chorus first and don't touch anything else until it feels complete." }
+    ]
+  },
+  {
+    id: "q5",
+    title: "How do you feel about the songs you actually finish?",
+    options: [
+      { text: "Proud of them. They feel like one cohesive song, not just parts stuck together",
+        sentence: "You're proud of the songs you finish. They feel like one cohesive piece, not parts stuck together." },
+      { text: "I finish them, but the sections rarely feel like they truly belong together",
+        sentence: "You finish songs that tend to feel disjointed, like the sections don't quite belong together." },
+      { text: "I often don't finish. I stall out once the pieces stop fitting together",
+        sentence: "You often stall out and don't finish, once the pieces stop fitting together." },
+      { text: "I finish quickly, but going back to make sure everything feels unified isn't something I usually do",
+        sentence: "You finish quickly, but you rarely go back to make sure everything feels unified." }
+    ]
+  },
+  {
+    id: "q6",
+    title: "When people hear your songs, what's the typical reaction?",
+    options: [
+      { text: "Mostly friends and family telling me they liked it",
+        sentence: "You mostly hear from friends and family when people react to your music." },
+      { text: "A polite reaction either way, but nobody gets excited about it",
+        sentence: "You get a polite reaction either way, but nobody gets especially excited." },
+      { text: "Strangers connect with it right away, even people who've never heard it before",
+        sentence: "You get strangers connecting with your songs right away, even people hearing them for the first time." },
+      { text: "People say they like it, but it doesn't turn into them replaying it or asking for it again",
+        sentence: "You hear that people like what you make, but it doesn't turn into them replaying it or asking for more." }
+    ]
+  }
+];
+
+const answers = {}; // { q1: {text, sentence}, ... }
+
+function buildQuestionScreens() {
+  const mount = document.getElementById("questions-mount");
+  QUESTIONS.forEach((q, qIndex) => {
+    const section = document.createElement("section");
+    section.className = "screen";
+    section.id = "screen-" + q.id;
+
+    const title = document.createElement("h2");
+    title.className = "question-title";
+    title.textContent = q.title;
+    section.appendChild(title);
+
+    const list = document.createElement("ul");
+    list.className = "choice-list";
+
+    q.options.forEach((opt) => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "choice";
+      btn.textContent = opt.text;
+      btn.addEventListener("click", () => selectAnswer(q, qIndex, opt, btn));
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+
+    section.appendChild(list);
+
+    if (qIndex > 0) {
+      const back = document.createElement("button");
+      back.type = "button";
+      back.className = "back-link";
+      back.textContent = "← Back";
+      back.addEventListener("click", () => goTo(QUESTIONS[qIndex - 1].id));
+      section.appendChild(back);
+    }
+
+    mount.appendChild(section);
+  });
+}
+
+function selectAnswer(question, qIndex, option, btnEl) {
+  answers[question.id] = { text: option.text, sentence: option.sentence };
+
+  const parent = btnEl.parentElement.parentElement;
+  parent.querySelectorAll(".choice").forEach((c) => c.classList.remove("selected"));
+  btnEl.classList.add("selected");
+
+  setTimeout(() => {
+    const next = qIndex < QUESTIONS.length - 1 ? QUESTIONS[qIndex + 1].id : "email";
+    goTo(next);
+  }, 220);
+}
+
+function goTo(screenId) {
+  document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
+  const target = document.getElementById("screen-" + screenId);
+  if (target) target.classList.add("active");
+
+  const qIndex = QUESTIONS.findIndex((q) => q.id === screenId);
+  const progressShell = document.getElementById("progressShell");
+  if (qIndex > -1) {
+    progressShell.classList.add("active");
+    document.getElementById("progressLabel").textContent = "Question " + (qIndex + 1) + " of " + QUESTIONS.length;
+    document.getElementById("progressFill").style.width = (((qIndex + 1) / QUESTIONS.length) * 100) + "%";
+  } else {
+    progressShell.classList.remove("active");
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function handleEmailSubmit(evt) {
+  evt.preventDefault();
+  const firstName = document.getElementById("firstName").value.trim();
+  const email = document.getElementById("emailAddress").value.trim();
+  const nameError = document.getElementById("nameError");
+  const emailError = document.getElementById("emailError");
+
+  let valid = true;
+  if (!firstName) { nameError.classList.add("active"); valid = false; } else { nameError.classList.remove("active"); }
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!emailOk) { emailError.classList.add("active"); valid = false; } else { emailError.classList.remove("active"); }
+
+  if (!valid) return false;
+
+  const submitBtn = document.getElementById("submitBtn");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Loading your results…";
+
+  sendToWebhook(firstName, email).finally(() => {
+    showResults();
+  });
+
+  return false;
+}
+
+function sendToWebhook(firstName, email) {
+  if (!INBOUND_WEBHOOK_URL) return Promise.resolve();
+
+  const payload = {
+    "First Name": firstName,
+    "Email Address": email,
+    "Q1": answers.q1 ? answers.q1.text : "",
+    "Q2": answers.q2 ? answers.q2.text : "",
+    "Q3": answers.q3 ? answers.q3.text : "",
+    "Q4": answers.q4 ? answers.q4.text : "",
+    "Q5": answers.q5 ? answers.q5.text : "",
+    "Q6": answers.q6 ? answers.q6.text : ""
+  };
+
+  return fetch(INBOUND_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(() => { /* never block results on a network hiccup */ });
+}
+
+function showResults() {
+  const p1 = [answers.q1, answers.q2, answers.q3].filter(Boolean).map(a => a.sentence).join(" ");
+  const p2 = [answers.q4, answers.q5, answers.q6].filter(Boolean).map(a => a.sentence).join(" ");
+  document.getElementById("resultParagraph1").textContent = p1;
+  document.getElementById("resultParagraph2").textContent = p2;
+  goTo("results");
+}
+
+buildQuestionScreens();
+</script>
+
+</body>
+</html>
