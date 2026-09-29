@@ -241,6 +241,14 @@
     .wrap { padding: 32px 18px 24px; }
   }
 </style>
+<script async src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
+<script>
+/* Seline helper: waits for the async Seline script, then runs fn. */
+function whenSeline(fn, tries){ tries = tries || 0;
+  if (window.seline && typeof window.seline.track === "function") { try { fn(window.seline); } catch(e){} return; }
+  if (tries < 50) setTimeout(function(){ whenSeline(fn, tries + 1); }, 100);
+}
+</script>
 </head>
 <body>
 <div class="wrap">

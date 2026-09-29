@@ -238,6 +238,14 @@
     .wrap { padding: 32px 18px 24px; }
   }
 </style>
+<script async src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
+<script>
+/* Seline helper: waits for the async Seline script, then runs fn. */
+function whenSeline(fn, tries){ tries = tries || 0;
+  if (window.seline && typeof window.seline.track === "function") { try { fn(window.seline); } catch(e){} return; }
+  if (tries < 50) setTimeout(function(){ whenSeline(fn, tries + 1); }, 100);
+}
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -296,7 +304,7 @@
     <p class="closing"><strong>Chorus First Songwriting</strong> walks through exactly how to fix what's not working. It's the same approach behind the songs I co-wrote with Shaggy, including "It Wasn't Me": 1.6B+ streams, two #1 Hot 100 singles, a #1 Billboard 200 album.</p>
     <p class="closing" style="font-weight:700;">Want the full breakdown of what to change and how?</p>
 
-    <a class="cta-btn" href="https://go.gigfanatic.com/chorus-first">Show Me The System <span class="arrow">→</span></a>
+    <a class="cta-btn" data-sln-event="cta: chorus first click" data-sln-event-from="missing-step-quiz" href="https://go.gigfanatic.com/chorus-first">Show Me The System <span class="arrow">→</span></a>
   </section>
 
   <footer>
@@ -500,6 +508,11 @@ function handleEmailSubmit(evt) {
   const submitBtn = document.getElementById("submitBtn");
   submitBtn.disabled = true;
   submitBtn.textContent = "Loading your results…";
+
+  whenSeline(function (seline) {
+    seline.setUser({ email: email, name: firstName, source: "missing-step-quiz" });
+    seline.track("optin: missing step quiz", { lead_magnet: "missing-step-quiz" });
+  });
 
   sendToWebhook(firstName, email).finally(() => {
     showResults();

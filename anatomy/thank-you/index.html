@@ -194,6 +194,14 @@
     .proof-photo { width: 100%; float: none; margin: 0 0 16px; }
   }
 </style>
+<script async src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
+<script>
+/* Seline helper: waits for the async Seline script, then runs fn. */
+function whenSeline(fn, tries){ tries = tries || 0;
+  if (window.seline && typeof window.seline.track === "function") { try { fn(window.seline); } catch(e){} return; }
+  if (tries < 50) setTimeout(function(){ whenSeline(fn, tries + 1); }, 100);
+}
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -234,7 +242,7 @@
 
   <p class="you-in">You in?</p>
 
-  <a class="cta-btn" href="http://go.gigfanatic.com/chorus-first">Yes, Give Me The System</a>
+  <a class="cta-btn" data-sln-event="cta: chorus first click" data-sln-event-from="anatomy" href="https://go.gigfanatic.com/chorus-first">Yes, Give Me The System</a>
 
   <img class="product-shot" src="../assets/course-mockup.png" alt="Chorus First Songwriting course mockup">
 
@@ -246,5 +254,18 @@
   </footer>
 
 </div>
+<script>
+/* Count one Anatomy opt-in per browser session (a refresh won't double count). */
+(function () {
+  var key = "sln_anatomy_optin";
+  try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, "1"); } catch (e) {}
+  var p = new URLSearchParams(location.search);
+  var email = p.get("email") || p.get("Email");
+  whenSeline(function (seline) {
+    if (email) seline.setUser({ email: email, name: p.get("first_name") || p.get("name") || undefined, source: "anatomy" });
+    seline.track("optin: anatomy", { lead_magnet: "anatomy" });
+  });
+})();
+</script>
 </body>
 </html>
