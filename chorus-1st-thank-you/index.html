@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You & Welcome to the Journey! | GigFanatic</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
+<script>
+  if (window.seline) {
+    seline.track('Order Completed', {
+      product: 'Chorus First Songwriting',
+      value: 297,
+      currency: 'USD'
+    });
+  }
+</script>
+<style>
+  :root {
+    --navy: #0A0D24;
+    --navy-card: #12152C;
+    --navy-card-border: rgba(255,255,255,0.08);
+    --white: #FFFFFF;
+    --muted: #9AA0B4;
+    --cyan: #29B6E8;
+    --cyan-dim: rgba(41,182,232,0.12);
+    --orange-1: #FFA066;
+    --orange-2: #F79256;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Poppins', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--cyan); }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    padding: 32px 24px 8px;
+  }
+
+  header img {
+    height: 30px;
+    display: block;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 40px 0 8px;
+  }
+
+  .badge {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: var(--cyan-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge svg { width: 28px; height: 28px; }
+
+  .eyebrow {
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin: 0 0 16px;
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1.15;
+    margin: 0 0 28px;
+  }
+
+  .lede {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  .lede p { margin: 0 0 20px; }
+  .lede strong { color: var(--white); font-weight: 600; }
+
+  .cta-row {
+    text-align: center;
+    margin: 36px 0 8px;
+  }
+
+  .cta {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--orange-1), var(--orange-2));
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px 36px;
+    border-radius: 8px;
+  }
+
+  section.steps {
+    padding: 56px 0 16px;
+  }
+
+  section.steps h2 {
+    text-align: center;
+    font-weight: 800;
+    font-size: 30px;
+    margin: 0 0 32px;
+  }
+
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .step-card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-card-border);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .step-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+
+  .step-card p {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0 0 12px;
+  }
+
+  .step-card p:last-child { margin-bottom: 0; }
+  .step-card strong { color: var(--white); font-weight: 600; }
+  .step-card a { color: var(--cyan); text-decoration: underline; }
+
+  section.next {
+    padding: 56px 0 8px;
+  }
+
+  section.next h2 {
+    font-weight: 800;
+    font-size: 28px;
+    margin: 0 0 20px;
+  }
+
+  section.next p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0 0 20px;
+  }
+
+  section.next strong { color: var(--white); font-weight: 600; }
+
+  .signoff {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .signoff img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .signoff .name { font-weight: 700; font-size: 15px; color: var(--white); }
+  .signoff .site { font-size: 13.5px; color: var(--muted); }
+
+  footer {
+    margin-top: 64px;
+    padding: 32px 24px 48px;
+    border-top: 1px solid var(--navy-card-border);
+  }
+
+  footer .legal {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    opacity: 0.75;
+    margin: 0 0 20px;
+  }
+
+  footer .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer .bottom a { color: var(--muted); text-decoration: none; }
+  footer .bottom a:hover { color: var(--cyan); }
+
+  .links { display: flex; gap: 20px; }
+
+  @media (max-width: 680px) {
+    h1 { font-size: 30px; }
+    section.steps h2 { font-size: 24px; }
+    .step-grid { grid-template-columns: 1fr; }
+    footer .bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <img src="https://assets.cdn.filesafe.space/KKRiBSNESqko1Du2FqCH/media/695f142fa0a484cf3b2fbb24.png" alt="GigFanatic">
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 12.5L9.5 18L20 6" stroke="#29B6E8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <p class="eyebrow">ORDER COMPLETE</p>
+    <h1>Thank You &amp; Welcome to the Journey!</h1>
+  </section>
+
+  <div class="lede">
+    <p>Hey there!</p>
+    <p>Your order for <strong>Chorus First Songwriting</strong> went through, and you&rsquo;re officially in.</p>
+    <p>I&rsquo;m Ricky &ldquo;RikRok&rdquo; Ducent. I built this course around the exact chorus-first method behind &ldquo;It Wasn&rsquo;t Me,&rdquo; and I&rsquo;m glad you&rsquo;re here.</p>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta" href="https://learn.gigfanatic.com/login">Go To Your Course</a>
+  </div>
+
+  <section class="steps">
+    <h2>Next Steps to Get Started</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Check Your Inbox</h3>
+        <p>You&rsquo;ll receive an email shortly with all the details you need to access <strong>Chorus First Songwriting</strong>.</p>
+        <p>Be sure to <strong>check your spam</strong> or <strong>junk folder</strong> if you don&rsquo;t see it within the next few minutes. Keep it handy&mdash;you&rsquo;ll reference it as you begin your journey.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Watch The Training</h3>
+        <p>Find uninterrupted time to focus on the course. Whether you&rsquo;re starting tonight or tomorrow, <strong>commit to those creative breakthroughs</strong> you&rsquo;ve been dreaming about.</p>
+        <p>The more energy <strong>you put into this</strong> process, the <strong>more rewarding</strong> it will feel.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Reach Out If You Need Help</h3>
+        <p>Got questions or need support along the way? No problem! Just reach out to us at <a href="mailto:support@gigfanatic.com">support@gigfanatic.com</a>, and we&rsquo;ll be happy to help you out.</p>
+        <p>(Make sure to include the email address you used to sign up. Thanks!)</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="next">
+    <p>One quick thing: you&rsquo;ve got <strong>lifetime access</strong>, so there&rsquo;s no rush. Work through it at your own pace.</p>
+    <p>Here&rsquo;s to the music you&rsquo;re about to write. 🎸</p>
+    <p>With gratitude,</p>
+    <div class="signoff">
+      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/KKRiBSNESqko1Du2FqCH/media/695f26af0597df05d9ba7d14.jpg" alt="Ricky &quot;RikRok&quot; Ducent">
+      <div>
+        <div class="name">Ricky &ldquo;RikRok&rdquo; Ducent</div>
+        <div class="site">GigFanatic.com</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p class="legal">Please note: We cannot guarantee or assure any specific outcomes or monetary gains from our ideas, information, tools, or strategies. However, we do guarantee your satisfaction with our training. If, within 365 days, you are dissatisfied with the quality of our training for any reason, you can request a full refund. It&rsquo;s important to understand that all of our company&rsquo;s products and services are intended solely for educational and informational purposes. None of the information provided on this page, our websites, or in our content or curriculum should be interpreted as a promise or guarantee of results or future earnings. We do not provide legal, medical, tax, or any other professional advice. Any financial figures mentioned here or on our websites are used to illustrate concepts and should not be considered as typical or exact earnings, nor should they be seen as promises of actual or future performance. Exercise caution and always seek guidance from your accountant, lawyer, or professional advisor before taking any action based on this or any information related to lifestyle changes, business, or finances. Ultimately, you are solely responsible for your decisions, actions, and outcomes in life. By registering here, you agree not to hold us liable for any decisions, actions, or results under any circumstances or at any time.</p>
+  <div class="bottom">
+    <span>Copyright &copy; 2026 GigFanatic. All rights registered.</span>
+    <div class="links">
+      <a href="https://gigfanatic.com/privacy-policy">Privacy Policy</a>
+      <a href="https://gigfanatic.com/terms">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
