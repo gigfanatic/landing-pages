@@ -50,12 +50,20 @@
   }
 
   header {
-    padding: 32px 24px 8px;
+    padding: 56px 24px 8px;
   }
 
-  header img {
-    height: 30px;
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
     display: block;
+  }
+
+  .logo span {
+    color: var(--cyan);
+    font-style: italic;
+    font-weight: 700;
   }
 
   .hero {
@@ -199,10 +207,9 @@
   }
 
   .signoff img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
     flex-shrink: 0;
   }
 
@@ -211,7 +218,7 @@
 
   footer {
     margin-top: 64px;
-    padding: 32px 24px 48px;
+    padding: 32px 24px 96px;
     border-top: 1px solid var(--navy-card-border);
   }
 
@@ -249,7 +256,7 @@
 <body>
 
 <header class="wrap">
-  <img src="https://assets.cdn.filesafe.space/KKRiBSNESqko1Du2FqCH/media/695f142fa0a484cf3b2fbb24.png" alt="GigFanatic">
+  <div class="logo">Gig<span>Fanatic</span></div>
 </header>
 
 <main class="wrap">
@@ -302,7 +309,7 @@
     <p>Here&rsquo;s to the music you&rsquo;re about to write. 🎸</p>
     <p>With gratitude,</p>
     <div class="signoff">
-      <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/KKRiBSNESqko1Du2FqCH/media/695f26af0597df05d9ba7d14.jpg" alt="Ricky &quot;RikRok&quot; Ducent">
+      <img src="rikrok-headshot.png" alt="Ricky &quot;RikRok&quot; Ducent">
       <div>
         <div class="name">Ricky &ldquo;RikRok&rdquo; Ducent</div>
         <div class="site">GigFanatic.com</div>
