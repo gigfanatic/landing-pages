@@ -55,11 +55,18 @@
     color: var(--ink-soft);
     margin-bottom: 6px;
   }
-  .spam {
-    font-size: 15px;
-    color: #9a9db8;
-    margin-bottom: 40px;
+  .inbox-note {
+    text-align: left;
+    background: var(--cyan-bg);
+    border: 1px solid #cdeaf6;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 4px 0 36px;
+    color: #2b2d47;
   }
+  .inbox-find { font-size: 17px; margin-bottom: 10px; }
+  .inbox-find strong { color: var(--ink); }
+  .inbox-spam { font-size: 16px; color: var(--ink-soft); }
   .eyebrow {
     display: inline-block;
     color: var(--orange);
@@ -214,7 +221,11 @@ function whenSeline(fn, tries){ tries = tries || 0;
 
   <h1>You&rsquo;re in.</h1>
   <p class="confirm">Anatomy of a Hit Song is on its way to your inbox right now.</p>
-  <p class="spam">(Check your spam folder if you don&rsquo;t see it in a few minutes.)</p>
+
+  <div class="inbox-note">
+    <div class="inbox-find">Look for an email from <strong>Ricky &ldquo;RikRok&rdquo; Ducent</strong> (ricky@gigfanatic.com) with the subject line: <strong>[Download] Anatomy of a Hit Song</strong></div>
+    <div class="inbox-spam">If it&rsquo;s not there in a few minutes, check Spam and Promotions. If that&rsquo;s where it landed, mark it &ldquo;Not spam&rdquo; or drag it to Primary, so my next emails reach you.</div>
+  </div>
 
   <div class="eyebrow">While you wait...</div>
 
