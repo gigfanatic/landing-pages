@@ -312,12 +312,13 @@
 /* =========================================================================
    CONFIG — GoHighLevel Inbound Webhook trigger URL.
    Posts straight to a GHL workflow (Inbound Webhook trigger) which
-   creates/updates the contact and enrolls them in the welcome sequence.
+   creates/updates the contact, tags it "quiz", emails the results and
+   then adds the contact to the welcome sequence.
    No Pabbly in the middle anymore.
    Leaving it blank still lets the quiz run and show results — it just
    won't send anything to GoHighLevel until this is filled in.
    ========================================================================= */
-const INBOUND_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/KKRiBSNESqko1Du2FqCH/webhook-trigger/2dcd0416-220d-4b6c-8401-2eb5e7422a34"; // <-- GHL Inbound Webhook trigger ("Missing Step Quiz -> GHL")
+const INBOUND_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/KKRiBSNESqko1Du2FqCH/webhook-trigger/e47ea5c9-c318-4209-90af-861688ac64c8"; // <-- GHL workflow "Missing Step Quiz Results Email" (sends the results email, then adds the contact to the Welcome Sequence). Old URL, the Welcome Sequence's own trigger: .../webhook-trigger/2dcd0416-220d-4b6c-8401-2eb5e7422a34
 
 const QUESTIONS = [
   {
