@@ -238,14 +238,6 @@
     .wrap { padding: 32px 18px 24px; }
   }
 </style>
-<script async src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
-<script>
-/* Seline helper: waits for the async Seline script, then runs fn. */
-function whenSeline(fn, tries){ tries = tries || 0;
-  if (window.seline && typeof window.seline.track === "function") { try { fn(window.seline); } catch(e){} return; }
-  if (tries < 50) setTimeout(function(){ whenSeline(fn, tries + 1); }, 100);
-}
-</script>
 </head>
 <body>
 <div class="wrap">
@@ -301,10 +293,10 @@ function whenSeline(fn, tries){ tries = tries || 0;
     </div>
 
     <p class="closing">That's the songwriter you are right now: what's working, what's getting in the way, and probably why some rooms respond and others don't.</p>
-    <p class="closing"><strong>Chorus First Songwriting</strong> walks through exactly how to fix what's not working. It's the same approach behind the songs I co-wrote with Shaggy, including "It Wasn't Me": 1.6B+ streams, two #1 Hot 100 singles, a #1 Billboard 200 album.</p>
+    <p class="closing"><strong>Chorus First Songwriting</strong> walks through exactly how to fix what's not working. It came from picking apart the songs I co-wrote with Shaggy, including "It Wasn't Me": 1.6B+ streams, two #1 Hot 100 singles, a #1 Billboard 200 album.</p>
     <p class="closing" style="font-weight:700;">Want the full breakdown of what to change and how?</p>
 
-    <a class="cta-btn" data-sln-event="cta: chorus first click" data-sln-event-from="missing-step-quiz" href="https://go.gigfanatic.com/chorus-first">Show Me The System <span class="arrow">→</span></a>
+    <a class="cta-btn" href="https://go.gigfanatic.com/chorus-first">Show Me The System <span class="arrow">→</span></a>
   </section>
 
   <footer>
@@ -509,11 +501,6 @@ function handleEmailSubmit(evt) {
   submitBtn.disabled = true;
   submitBtn.textContent = "Loading your results…";
 
-  whenSeline(function (seline) {
-    seline.setUser({ email: email, name: firstName, source: "missing-step-quiz" });
-    seline.track("optin: missing step quiz", { lead_magnet: "missing-step-quiz" });
-  });
-
   sendToWebhook(firstName, email).finally(() => {
     showResults();
   });
@@ -524,9 +511,13 @@ function handleEmailSubmit(evt) {
 function sendToWebhook(firstName, email) {
   if (!INBOUND_WEBHOOK_URL) return Promise.resolve();
 
+  const results = buildResultParagraphs();
   const payload = {
     "First Name": firstName,
     "Email Address": email,
+    "source": "Missing Step Quiz",
+    "result_creative_process": results.p1,
+    "result_execution_reactions": results.p2,
     "Q1": answers.q1 ? answers.q1.text : "",
     "Q2": answers.q2 ? answers.q2.text : "",
     "Q3": answers.q3 ? answers.q3.text : "",
@@ -542,11 +533,19 @@ function sendToWebhook(firstName, email) {
   }).catch(() => { /* never block results on a network hiccup */ });
 }
 
+/* The two results paragraphs. Used on the results screen AND sent to
+   GoHighLevel, so the results email shows exactly what the page shows. */
+function buildResultParagraphs() {
+  return {
+    p1: [answers.q1, answers.q2, answers.q3].filter(Boolean).map(a => a.sentence).join(" "),
+    p2: [answers.q4, answers.q5, answers.q6].filter(Boolean).map(a => a.sentence).join(" ")
+  };
+}
+
 function showResults() {
-  const p1 = [answers.q1, answers.q2, answers.q3].filter(Boolean).map(a => a.sentence).join(" ");
-  const p2 = [answers.q4, answers.q5, answers.q6].filter(Boolean).map(a => a.sentence).join(" ");
-  document.getElementById("resultParagraph1").textContent = p1;
-  document.getElementById("resultParagraph2").textContent = p2;
+  const results = buildResultParagraphs();
+  document.getElementById("resultParagraph1").textContent = results.p1;
+  document.getElementById("resultParagraph2").textContent = results.p2;
   goTo("results");
 }
 
