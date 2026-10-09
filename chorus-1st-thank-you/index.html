@@ -251,6 +251,75 @@
     footer .bottom { flex-direction: column; align-items: flex-start; }
   }
 </style>
+<!-- Growify pixel (ad attribution). async so a slow Growify server can never hold up the page. -->
+<script async src="https://cdn.growify.ai/pixel.min.js" data-website-id="238f9f692e0b50e5cdfe7e57fb94bc32:fd09a8e6af357595810a797f43c624383ec98b005acaac156d862a3befe87f0349665433b6db5817790fca103a20b9ac" data-endpoint="api_v2" data-platform="web"></script>
+<script>
+/* Growify purchase conversion.
+   Sent only for a visitor who really came through checkout, so opening,
+   previewing or refreshing this page does not record a sale. A visit counts
+   when ANY of these is true:
+     - the URL carries an order id from the checkout,
+     - the visitor arrived from the Cayman Gateway checkout,
+     - the visitor clicked a buy button on the sales page in the last 6 hours
+       (cookie "gf_checkout", set by lp.gigfanatic.com/).
+   Add ?grp_debug=1 to the URL to see the decision in the browser console. */
+(function () {
+  var PRICE = 297; /* keep in step with the course price */
+  var q = new URLSearchParams(location.search);
+  var debug = q.get("grp_debug") === "1";
+  function log(m) { if (debug && window.console) console.log("[growify] " + m); }
+  function pick(names) { for (var i = 0; i < names.length; i++) { var v = q.get(names[i]); if (v) return v; } return ""; }
+
+  var orderParam = pick(["order_id", "orderId", "orderid", "order", "transaction_id", "transactionId", "txn_id", "invoice_id", "invoice", "reference"]);
+  var refHost = "";
+  try { refHost = document.referrer ? new URL(document.referrer).hostname : ""; } catch (e) {}
+  var fromCheckout = /(^|\.)caymangateway\.online$/i.test(refHost);
+  var clickedBuy = /(?:^|;\s*)gf_checkout=1(?:;|$)/.test(document.cookie);
+
+  if (!orderParam && !fromCheckout && !clickedBuy) { log("not sent: no sign of a checkout (direct visit)"); return; }
+
+  var orderId = orderParam;
+  try {
+    if (orderId) {
+      if (localStorage.getItem("gf_grp_order") === orderId) { log("not sent: order " + orderId + " already sent"); return; }
+      localStorage.setItem("gf_grp_order", orderId);
+    } else {
+      if (sessionStorage.getItem("gf_grp_order")) { log("not sent: already sent in this tab"); return; }
+      orderId = "CFS-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+      sessionStorage.setItem("gf_grp_order", orderId);
+    }
+  } catch (e) {
+    if (!orderId) orderId = "CFS-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+  }
+  /* one sale per buy click */
+  document.cookie = "gf_checkout=; domain=.gigfanatic.com; path=/; max-age=0";
+
+  var data = {
+    orderId: orderId,
+    tax: 0,
+    shipping: 0,
+    products: [{
+      productId: "chorus-first-songwriting",
+      productName: "Chorus First Songwriting",
+      productPrice: PRICE,
+      productBrand: "GigFanatic",
+      productQuantity: 1,
+      purchaseValue: PRICE
+    }]
+  };
+  var email = pick(["email", "Email"]);
+  var first = pick(["first_name", "firstName", "firstname"]);
+  var last = pick(["last_name", "lastName", "lastname"]);
+  if (email) data.userEmail = email;
+  if (first) data.userFirstName = first;
+  if (last) data.userLastName = last;
+
+  window.grpQueue = window.grpQueue || [];
+  if (!window.grp) { window.grp = function () { window.grpQueue.push(arguments); }; }
+  window.grp("conversion", data);
+  log("sent: order " + orderId + " (" + (orderParam ? "order id in URL" : fromCheckout ? "came from checkout" : "buy click") + ")");
+})();
+</script>
 </head>
 <body>
 

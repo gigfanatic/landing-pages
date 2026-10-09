@@ -26,9 +26,13 @@
   /* Seline: count clicks on any "buy" button. Listener sits on document so it survives the bundler's page swap. */
   document.addEventListener("click", function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href*="buycfs"]') : null;
+    /* Growify: remember the buy click for 6 hours so the thank-you page can tell a buyer from a visitor. */
+    if (a) { try { document.cookie = "gf_checkout=1; domain=.gigfanatic.com; path=/; max-age=21600; SameSite=Lax"; } catch (err) {} }
     if (a && window.seline) { try { window.seline.track("checkout: started", { offer: "chorus-first", price: 297 }); } catch (err) {} }
   }, true);
   </script>
+  <!-- Growify pixel (ad attribution). async so a slow Growify server can never hold up the page. -->
+  <script async src="https://cdn.growify.ai/pixel.min.js" data-website-id="238f9f692e0b50e5cdfe7e57fb94bc32:fd09a8e6af357595810a797f43c624383ec98b005acaac156d862a3befe87f0349665433b6db5817790fca103a20b9ac" data-endpoint="api_v2" data-platform="web"></script>
 </head>
 <body>
   <div id="__bundler_thumbnail">
