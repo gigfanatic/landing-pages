@@ -9,15 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
 <script src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
-<script>
-  if (window.seline) {
-    seline.track('Order Completed', {
-      product: 'Chorus First Songwriting',
-      value: 297,
-      currency: 'USD'
-    });
-  }
-</script>
+<!-- The Seline "Order Completed" event is sent further down, by the purchase tracking block, so it only counts real buyers. -->
 <style>
   :root {
     --navy: #0A0D24;
@@ -254,7 +246,7 @@
 <!-- Growify pixel (ad attribution). async so a slow Growify server can never hold up the page. -->
 <script async src="https://cdn.growify.ai/pixel.min.js" data-website-id="238f9f692e0b50e5cdfe7e57fb94bc32:fd09a8e6af357595810a797f43c624383ec98b005acaac156d862a3befe87f0349665433b6db5817790fca103a20b9ac" data-endpoint="api_v2" data-platform="web"></script>
 <script>
-/* Growify purchase conversion.
+/* Purchase tracking: one sale to Growify and one "Order Completed" to Seline.
    Sent only for a visitor who really came through checkout, so opening,
    previewing or refreshing this page does not record a sale. A visit counts
    when ANY of these is true:
@@ -317,6 +309,14 @@
   window.grpQueue = window.grpQueue || [];
   if (!window.grp) { window.grp = function () { window.grpQueue.push(arguments); }; }
   window.grp("conversion", data);
+
+  /* Seline: the same sale, under the same check. Waits for the Seline script if it is not ready yet. */
+  (function sendSeline(tries) {
+    if (window.seline && window.seline.track) {
+      try { window.seline.track("Order Completed", { product: "Chorus First Songwriting", value: PRICE, currency: "USD" }); } catch (e) {}
+    } else if (tries < 50) { setTimeout(function () { sendSeline(tries + 1); }, 100); }
+  })(0);
+
   log("sent: order " + orderId + " (" + (orderParam ? "order id in URL" : fromCheckout ? "came from checkout" : "buy click") + ")");
 })();
 </script>
