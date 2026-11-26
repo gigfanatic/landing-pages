@@ -618,6 +618,18 @@ function loadShareWidget(tries) {
 }
 
 buildQuestionScreens();
+
+/* Visitors coming from the quiz landing page (links end in ?start=1) have
+   already read the pitch, so skip the intro screen and open on question 1.
+   Anyone arriving another way still sees the intro. */
+(function () {
+  var params = new URLSearchParams(location.search);
+  if (params.get("start") !== "1") return;
+  params.delete("start");
+  var qs = params.toString();
+  history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+  goTo("q1");
+})();
 </script>
 
 <!-- UpViral: refer-3 unlock for the Nice Test (campaign 169246) -->
