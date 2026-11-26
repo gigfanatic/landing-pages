@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+/* UpViral matches this page by its exact address (".../missing-step-quiz/quiz").
+   Visitors arriving on quiz.html get the same page; drop the ".html" from the
+   address bar before the UpViral code reads it. */
+if (/\/quiz\.html$/.test(location.pathname)) {
+  history.replaceState(null, "", location.pathname.replace(/\.html$/, "") + location.search + location.hash);
+}
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="favicon.ico">
