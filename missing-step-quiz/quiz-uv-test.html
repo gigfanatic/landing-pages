@@ -248,7 +248,7 @@
   .share-block h2 { font-size: 26px; line-height: 1.2; margin: 8px 0 12px; color: var(--ink); }
   .share-block p { font-size: 17px; color: var(--ink); margin: 0 0 12px; }
   .share-block .share-how { font-size: 15px; color: var(--ink-soft); }
-  .uvembed169246 { margin-top: 16px; min-height: 120px; }
+  .uvembed169246 { margin-top: 16px; background: transparent; }
 </style>
 <script>
 /* Seline helper: waits for the async Seline script, then runs fn. */
@@ -325,7 +325,7 @@ function whenSeline(fn, tries){ tries = tries || 0;
       <h2>Is your chorus ready, or is it just "nice"?</h2>
       <p>When people call your song "nice," the chorus is usually why. The Nice Test is 8 quick questions you answer about one of your own songs. It scores your chorus and gives you a fix for every weak spot it finds.</p>
       <p class="share-how">Share your link with 3 songwriter or musician friends. Once 3 of them take the quiz, the Nice Test unlocks and I'll email it to you.</p>
-      <div class="uvembed169246"></div>
+      <iframe class="uvembed169246" title="Your share link" style="width:100%;min-height:640px;border:0;display:block;"></iframe>
     </div>
   </section>
 
@@ -539,6 +539,7 @@ function handleEmailSubmit(evt) {
 
   sendToWebhook(firstName, email).finally(() => {
     showResults();
+    loadShareWidget();
   });
 
   return false;
@@ -583,6 +584,24 @@ function showResults() {
   document.getElementById("resultParagraph1").textContent = results.p1;
   document.getElementById("resultParagraph2").textContent = results.p2;
   goTo("results");
+}
+
+
+/* UpViral: once the sign-up has been saved (UpViral sets a cookie with the
+   lead id), ask UpViral for this person's share page and load it into the
+   iframe in the share block. On later visits the UpViral snippet does this
+   by itself on page load. */
+function loadShareWidget(tries) {
+  tries = tries || 0;
+  var m = document.cookie.match(/upviral_user_id169246=([^;]+)/);
+  if (!m) { if (tries < 40) setTimeout(function(){ loadShareWidget(tries + 1); }, 250); return; }
+  if (!window.Upviral || typeof window.Upviral.campaignDetail !== "function") return;
+  var s = document.createElement("script");
+  s.src = "https://app.upviral.com/embed/camp-info/call/ajax/onJSONPLoad/Upviral.campaignDetail/?0=0&camp=169246&snippet_id=undefined"
+        + "&current_url=" + encodeURIComponent(location.host + location.pathname)
+        + "&lead_id=" + encodeURIComponent(m[1])
+        + "&ref_id=&s_track=&by=null&uvemail=&uvname=&is_widget=yes&widget_style=jsCode";
+  document.body.appendChild(s);
 }
 
 buildQuestionScreens();
