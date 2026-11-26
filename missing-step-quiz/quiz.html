@@ -242,6 +242,13 @@
     .question-title { font-size: 21px; }
     .wrap { padding: 32px 18px 24px; }
   }
+  .course-shot { display:block; width:100%; height:auto; margin: 4px 0 22px; border-radius: 12px; }
+  /* ---- UpViral share-to-unlock block ---- */
+  .share-block { margin-top: 44px; padding: 28px 24px; background: var(--cyan-bg); border: 1px solid var(--border); border-radius: 16px; }
+  .share-block h2 { font-size: 26px; line-height: 1.2; margin: 8px 0 12px; color: var(--ink); }
+  .share-block p { font-size: 19px; color: #2b2d47; margin: 0 0 14px; }
+  .share-block .share-how { font-size: 17px; color: var(--ink-soft); }
+  .uvembed169246 { margin-top: 16px; background: transparent; }
 </style>
 <script async src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
 <script>
@@ -313,7 +320,17 @@ function whenSeline(fn, tries){ tries = tries || 0;
     <p class="closing"><strong>Chorus First Songwriting</strong> walks through exactly how to fix what's not working. It came from picking apart the songs I co-wrote with Shaggy, including "It Wasn't Me": 1.6B+ streams, two #1 Hot 100 singles, a #1 Billboard 200 album.</p>
     <p class="closing" style="font-weight:700;">Want the full breakdown of what to change and how?</p>
 
+    <img class="course-shot" src="assets/course-mockup.jpg" width="1088" height="569" alt="Chorus First Songwriting course on desktop, laptop and phone">
+
     <a class="cta-btn" href="https://go.gigfanatic.com/chorus-first">Show Me The System <span class="arrow">→</span></a>
+
+    <div class="share-block" id="shareBlock">
+      <div class="badge">Free bonus for finishing the quiz</div>
+      <h2>Get the Nice Test free</h2>
+      <p>Is your chorus ready, or is it just "nice"? When people call your song "nice," the chorus is usually why. The Nice Test is 8 quick questions you answer about one of your own songs. It scores your chorus and gives you a fix for every weak spot it finds.</p>
+      <p class="share-how">Use your unique referral link below to share the quiz you just took. When 3 songwriter or musician friends take it, you get free access to the Nice Test and I'll email it to you.</p>
+      <iframe class="uvembed169246" title="Your share link" allow="clipboard-write; web-share" style="width:100%;min-height:640px;border:0;display:block;"></iframe>
+    </div>
   </section>
 
   <footer>
@@ -526,6 +543,7 @@ function handleEmailSubmit(evt) {
 
   sendToWebhook(firstName, email).finally(() => {
     showResults();
+    loadShareWidget();
   });
 
   return false;
@@ -572,8 +590,28 @@ function showResults() {
   goTo("results");
 }
 
+
+/* UpViral: once the sign-up has been saved (UpViral sets a cookie with the
+   lead id), ask UpViral for this person's share page and load it into the
+   iframe in the share block. On later visits the UpViral snippet does this
+   by itself on page load. */
+function loadShareWidget(tries) {
+  tries = tries || 0;
+  var m = document.cookie.match(/upviral_user_id169246=([^;]+)/);
+  if (!m) { if (tries < 40) setTimeout(function(){ loadShareWidget(tries + 1); }, 250); return; }
+  if (!window.Upviral || typeof window.Upviral.campaignDetail !== "function") return;
+  var s = document.createElement("script");
+  s.src = "https://app.upviral.com/embed/camp-info/call/ajax/onJSONPLoad/Upviral.campaignDetail/?0=0&camp=169246&snippet_id=undefined"
+        + "&current_url=" + encodeURIComponent(location.host + location.pathname)
+        + "&lead_id=" + encodeURIComponent(m[1])
+        + "&ref_id=&s_track=&by=null&uvemail=&uvname=&is_widget=yes&widget_style=jsCode";
+  document.body.appendChild(s);
+}
+
 buildQuestionScreens();
 </script>
 
+<!-- UpViral: refer-3 unlock for the Nice Test (campaign 169246) -->
+<script> !(function (u, p, v, i, r, a, l) { if (u.upq) return; r = u.upq = function () { r.callMethod ? r.callMethod.apply(r, arguments) : r.queue.push(arguments);}; r.push = r; r.loaded = !0; r.version = "1.0"; r.queue = []; a = p.createElement(v); a.src = i; l = p.getElementsByTagName(v)[0]; l.parentNode.insertBefore(a, l); })(window, document, "script", "https://snippet.upviral.com/upviral.min.js");upq('init', {camp: "G((A&A", widget_style: 'jsCode',width: "100%"}); </script>
 </body>
 </html>
