@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nice Test: score your chorus in 5 minutes | GigFanatic</title>
+<meta name="description" content="8 questions that tell you, in about five minutes, whether your chorus is the reason people call your songs nice.">
+<meta name="robots" content="noindex">
+<script>
+/* Read the contact details GHL puts on the email link, keep them for this
+   visit only, then strip them from the address bar straight away so they
+   never show up in analytics, history or a shared link. */
+(function () {
+  try {
+    var p = new URLSearchParams(window.location.search);
+    var id = p.get("contact_id") || p.get("cid") || "";
+    var em = p.get("email") || "";
+    if (id) sessionStorage.setItem("nt_contact_id", id);
+    if (em) sessionStorage.setItem("nt_email", em);
+    if (id || em) {
+      p.delete("contact_id"); p.delete("cid"); p.delete("email");
+      var q = p.toString();
+      history.replaceState(null, "", window.location.pathname + (q ? "?" + q : "") + window.location.hash);
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A0D24;
+    --ink: #12142b;
+    --ink-soft: #4a4d6b;
+    --cyan: #0d95c2;
+    --cyan-text: #0a7ea6;
+    --cyan-bg: #e8f6fc;
+    --orange: #e2703a;
+    --orange-text: #9a4317;
+    --orange-bg: #fdeee6;
+    --card: #f6f7fb;
+    --border: #e3e5f0;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--white); color: var(--ink); font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: Outfit, Inter, sans-serif; color: var(--navy); margin: 0; line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; }
+  p { margin: 0; text-wrap: pretty; }
+  a { color: var(--cyan-text); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 22px; }
+
+  /* Hero */
+  .hero { background: var(--navy); color: var(--white); padding: 36px 0 56px; }
+  .hero-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .hero-top img { width: 160px; height: auto; display: block; }
+  .hero-top span { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #a9b0d6; }
+  .pill { display: inline-block; margin-top: 48px; padding: 6px 14px; border-radius: 999px; background: var(--orange); color: var(--navy); font-size: 14px; font-weight: 700; }
+  .hero h1 { color: var(--white); font-size: clamp(52px, 11vw, 92px); font-weight: 800; letter-spacing: -0.03em; margin-top: 16px; line-height: 1; }
+  .hero .sub { margin-top: 18px; font-size: clamp(19px, 3.2vw, 23px); line-height: 1.45; color: #d6daf0; max-width: 600px; }
+  .hero-photo { position: relative; margin-top: 36px; border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 9; background: #151a3d; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 30%; display: block; }
+  .hero-photo .quote { position: absolute; left: 18px; bottom: 18px; right: 18px; max-width: max-content; padding: 12px 18px; border-radius: 14px; background: var(--white); color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .hero-photo .quote b { font-family: Outfit, sans-serif; font-size: 20px; }
+  .hero-photo .quote span { font-size: 14px; color: var(--ink-soft); }
+  .byline { margin-top: 22px; display: flex; flex-direction: column; gap: 2px; }
+  .byline b { font-family: Outfit, sans-serif; font-size: 20px; }
+  .byline span { font-size: 15px; color: #c2c7e4; }
+  .start-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 15px 26px; border-radius: 999px; background: var(--cyan); color: var(--navy); font-family: Outfit, sans-serif; font-weight: 700; font-size: 18px; text-decoration: none; }
+  .start-btn:hover { background: #33b0da; }
+
+  /* Sections */
+  section { padding: 56px 0 0; }
+  .intro h2 { font-size: clamp(38px, 7vw, 52px); font-weight: 800; }
+  .intro .body { margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .intro strong { color: var(--navy); }
+  .howto { margin-top: 36px; padding: 26px 24px; border-radius: 18px; background: var(--cyan-bg); }
+  .howto h3 { font-size: 24px; }
+  .howto ol { margin: 14px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+  .howto p { margin-top: 14px; font-size: 15px; }
+
+  /* Questions */
+  .q-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 8px 16px; }
+  .q-head h2 { font-size: clamp(34px, 6vw, 44px); font-weight: 800; }
+  .q-head .legend { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
+  .questions { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  fieldset.q { margin: 0; border: 0; padding: 18px 18px 16px; border-radius: 16px; background: var(--card); display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 4px 14px; transition: background .2s; }
+  fieldset.q.done { background: #eef8fc; }
+  .q-num { grid-row: span 3; width: 36px; height: 36px; border-radius: 9px; background: var(--navy); color: var(--white); font-family: Outfit, sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  fieldset.q legend { display: contents; }
+  .q-text { font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--navy); }
+  .q-why { font-size: 15px; color: var(--ink-soft); line-height: 1.5; }
+  .stranger { display: inline-block; margin-left: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--orange-text); white-space: nowrap; }
+  .opts { margin-top: 10px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .opts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .opts label { min-height: 48px; padding: 8px 10px; border-radius: 12px; border: 2px solid #c9cde3; background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 15px; color: var(--ink); text-align: center; transition: border-color .15s, background .15s, color .15s; }
+  .opts label .n { font-family: Outfit, sans-serif; font-size: 18px; color: var(--cyan-text); }
+  .opts label:hover { border-color: var(--cyan); }
+  .opts input:focus-visible + label { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .opts input:checked + label { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .opts input:checked + label .n { color: #7fd3f0; }
+
+  /* Sticky score bar */
+  .scorebar { position: sticky; bottom: 0; z-index: 5; margin-top: 18px; background: var(--navy); color: var(--white); border-radius: 16px 16px 0 0; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 -6px 24px rgba(10, 13, 36, 0.18); }
+  .scorebar .count { font-size: 14px; color: #c2c7e4; }
+  .scorebar .total { font-family: Outfit, sans-serif; font-weight: 700; font-size: 26px; }
+  .scorebar .total small { font-size: 16px; color: #a9b0d6; font-weight: 600; }
+
+  /* Results */
+  .result[hidden] { display: none; }
+  .scale { margin-top: 20px; }
+  .scale-bar { position: relative; display: flex; height: 52px; border-radius: 14px; overflow: hidden; }
+  .scale-bar div { display: flex; align-items: center; padding: 0 14px; font-family: Outfit, sans-serif; font-weight: 700; font-size: 16px; }
+  .seg-trap { flex: 7 1 0; background: var(--orange); color: var(--navy); }
+  .seg-close { flex: 5 1 0; background: var(--cyan); color: var(--navy); border-left: 3px solid var(--white); }
+  .seg-ready { flex: 5 1 0; background: var(--navy); color: var(--white); border-left: 3px solid var(--white); }
+  .scale-nums { display: flex; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-top: 6px; }
+  .scale-nums span:nth-child(1) { flex: 7 1 0; } .scale-nums span:nth-child(2) { flex: 5 1 0; } .scale-nums span:nth-child(3) { flex: 5 1 0; }
+  .scale-track { position: relative; padding-top: 40px; }
+  .pin { position: absolute; top: 0; bottom: -8px; width: 4px; margin-left: -2px; background: var(--navy); border-radius: 2px; z-index: 2; transition: left .4s; box-shadow: 0 0 0 2px var(--white); }
+  .pin span { position: absolute; top: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 3px 10px; border-radius: 999px; background: var(--navy); color: var(--white); font-family: Outfit, sans-serif; font-weight: 700; font-size: 14px; }
+  .band-card { margin-top: 24px; padding: 26px 24px; border-radius: 18px; border-top: 6px solid var(--orange); background: var(--orange-bg); }
+  .band-card.close { border-top-color: var(--cyan); background: var(--cyan-bg); }
+  .band-card.ready { border-top-color: var(--navy); background: #eceef7; }
+  .band-card .range { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; color: var(--orange-text); }
+  .band-card.close .range { color: #08698b; }
+  .band-card.ready .range { color: #3a3e63; }
+  .band-card h3 { margin-top: 6px; font-size: 30px; }
+  .band-card p { margin-top: 10px; }
+  .fixes-title { margin-top: 40px; font-size: clamp(28px, 5vw, 36px); font-weight: 800; }
+  .fixes-sub { margin-top: 8px; color: var(--ink-soft); }
+  .fixes { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .fix { padding: 18px 18px; border-radius: 14px; background: var(--card); }
+  .fix-head { display: flex; align-items: center; gap: 10px; }
+  .fix-head .n { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--navy); color: var(--white); font-family: Outfit, sans-serif; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+  .fix-head h4 { margin: 0; font-family: Outfit, sans-serif; font-size: 18px; color: var(--navy); line-height: 1.2; }
+  .fix-head .got { margin-left: auto; flex: none; font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+  .fix p { margin-top: 8px; font-size: 15.5px; line-height: 1.5; }
+  .fix p strong { color: var(--orange-text); }
+  details.allfixes { margin-top: 16px; }
+  .gate[hidden], .fixes-wrap[hidden] { display: none; }
+  .gate { margin-top: 32px; padding: 28px 26px; border-radius: 18px; background: var(--navy); color: var(--white); }
+  .gate h2 { color: var(--white); font-size: clamp(28px, 5vw, 36px); font-weight: 800; }
+  .gate .gate-sub { margin-top: 10px; color: #d6daf0; }
+  .gate form { margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .gate label { display: block; font-size: 14px; font-weight: 600; color: #c2c7e4; margin-bottom: 6px; }
+  .gate input { width: 100%; min-height: 50px; padding: 12px 14px; border-radius: 12px; border: 2px solid transparent; font: inherit; font-size: 16px; color: var(--ink); background: var(--white); }
+  .gate input:focus { outline: none; border-color: var(--cyan); }
+  .gate .err { display: none; margin-top: 6px; font-size: 13.5px; color: #ffb38f; }
+  .gate .err.on { display: block; }
+  .gate button { grid-column: 1 / -1; min-height: 54px; border: 0; border-radius: 999px; background: var(--orange); color: var(--navy); font-family: Outfit, sans-serif; font-weight: 700; font-size: 19px; cursor: pointer; }
+  .gate button:hover { background: #ec8452; }
+  .gate button:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+  .gate button[disabled] { opacity: .7; cursor: default; }
+  .gate .privacy { grid-column: 1 / -1; margin: 0; font-size: 13.5px; color: #a9b0d6; text-align: center; }
+  .confirm { margin-top: 32px; padding: 14px 18px; border-radius: 12px; background: var(--cyan-bg); font-weight: 600; color: var(--navy); }
+  .confirm[hidden] { display: none; }
+  @media (max-width: 520px) { .gate form { grid-template-columns: minmax(0, 1fr); } }
+  details.allfixes summary { cursor: pointer; font-weight: 600; color: var(--cyan-text); padding: 8px 0; }
+
+  /* Recap + closing */
+  .recap { padding: 28px 26px; border-radius: 18px; background: var(--navy); color: var(--white); }
+  .recap h2 { color: var(--white); font-size: 26px; font-weight: 700; }
+  .recap ol { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .recap li { display: flex; gap: 14px; align-items: flex-start; }
+  .recap li span { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--orange); color: var(--navy); font-family: Outfit, sans-serif; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .closing h2 { font-size: clamp(30px, 5.5vw, 38px); font-weight: 800; }
+  .closing .body { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .cta-row { margin-top: 32px; padding: 24px; border-radius: 18px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .signoff { display: flex; align-items: center; gap: 14px; }
+  .signoff img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; }
+  .signoff b { display: block; font-family: Outfit, sans-serif; font-size: 22px; color: var(--navy); }
+  .cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; border-radius: 999px; background: var(--orange); color: var(--navy); font-family: Outfit, sans-serif; font-weight: 700; font-size: 19px; text-decoration: none; }
+  .cta:hover { background: #ec8452; }
+
+  footer { margin-top: 64px; padding: 28px 0 40px; border-top: 1px solid var(--border); }
+  footer p { font-size: 13px; color: #6b6e8a; margin-bottom: 10px; }
+  footer a { color: var(--ink-soft); }
+  .foot-links { font-size: 13px; color: #6b6e8a; margin-bottom: 6px; }
+
+  @media (max-width: 520px) {
+    body { font-size: 16.5px; }
+    .opts label { flex-direction: column; gap: 0; font-size: 13.5px; }
+    fieldset.q { grid-template-columns: 30px minmax(0, 1fr); padding: 16px 14px 14px; gap: 4px 12px; }
+    .q-num { width: 30px; height: 30px; font-size: 15px; }
+    .scale-bar div { font-size: 13px; padding: 0 8px; }
+    .cta { width: 100%; justify-content: center; font-size: 17px; padding: 16px 18px; white-space: nowrap; }
+  }
+</style>
+<script async src="https://cdn.seline.com/seline.js" data-token="0b16281cf89d070" data-cookie-on-identify="true"></script>
+<script>
+/* Seline helper: waits for the async Seline script, then runs fn. */
+function whenSeline(fn, tries){ tries = tries || 0;
+  if (window.seline && typeof window.seline.track === "function") { try { fn(window.seline); } catch(e){} return; }
+  if (tries < 50) setTimeout(function(){ whenSeline(fn, tries + 1); }, 100);
+}
+</script>
+<!-- Growify pixel (ad attribution). async so a slow Growify server can never hold up the page. -->
+<script async src="https://cdn.growify.ai/pixel.min.js" data-website-id="238f9f692e0b50e5cdfe7e57fb94bc32:fd09a8e6af357595810a797f43c624383ec98b005acaac156d862a3befe87f0349665433b6db5817790fca103a20b9ac" data-endpoint="api_v2" data-platform="web"></script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <img src="assets/logo-dark.png" alt="GigFanatic" width="160" height="40">
+      <span>Free chorus scorecard</span>
+    </div>
+    <span class="pill">8 questions · about 5 minutes</span>
+    <h1>The Nice Test</h1>
+    <p class="sub">8 questions that tell you, in about five minutes, whether your chorus is the reason people call your songs "nice."</p>
+    <div class="hero-photo">
+      <img src="assets/studio.jpg" alt="Ricky at the keyboard in his studio" width="1200" height="900">
+      <div class="quote"><b>"That's nice."</b><span>The feedback this test is built to end.</span></div>
+    </div>
+    <div class="byline">
+      <b>By Ricky</b>
+      <span>Co-writer of "It Wasn't Me" (just over 1.5 billion streams on Spotify)</span>
+    </div>
+    <a class="start-btn" href="#questions">Start the test
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="intro">
+    <h2>"That's nice."</h2>
+    <div class="body">
+      <p>If you've ever played a song for friends or family, you've heard it. You've probably seen the look that comes with it, too. Truth be told, "nice" is the most dangerous thing anyone can say about your song. Nobody hates it, so nothing changes. A week later, nobody remembers it.</p>
+      <p>I know because I made a whole album of nice. Shortly after the Shaggy hits, two friends and I started our own label and made whatever music we liked. We never once thought about who it was for. That album cost about $20,000. It went nowhere.</p>
+      <p>Looking back, I can tell you exactly why. The choruses were nice, and that's all they were. Nothing stuck in your head. I struggle to remember any of them myself, which is a strange thing for the guy who wrote them to admit, to say the least.</p>
+      <p><strong>Here's the problem:</strong> when I hear a song from an up-and-coming songwriter, the comment I give most often is "Hmm, what was the chorus?" That's where nice lives. So that's where this test looks.</p>
+      <p><strong>Grab one of your songs. You'll have your score in about five minutes.</strong></p>
+    </div>
+    <div class="howto">
+      <h3>How to use it</h3>
+      <ol>
+        <li>Pick one finished song. Just one.</li>
+        <li>Play or sing the chorus out loud, once or twice.</li>
+        <li>Answer each question fast. Your first honest answer is usually the right one.</li>
+        <li>Tap <b>No</b>, <b>Sort of</b> or <b>Yes</b> for each one. Your score adds itself up.</li>
+        <li>Answer all 8 to see your band and what to fix first.</li>
+      </ol>
+      <p><strong>Questions 3 and 6 are about strangers.</strong> If you can, play the chorus for someone who's never heard it and let them answer those two.</p>
+    </div>
+  </section>
+
+  <section id="questions">
+    <div class="q-head">
+      <h2>The 8 questions</h2>
+      <span class="legend">No = 0 · Sort of = 1 · Yes = 2</span>
+    </div>
+    <form class="questions" id="quiz" onsubmit="return false">
+      <!-- Filled from QUESTIONS below so the copy lives in one place. -->
+    </form>
+    <div class="scorebar" aria-live="polite">
+      <span class="count" id="count">0 of 8 answered</span>
+      <span class="total"><span id="total">0</span> <small>/ 16</small></span>
+    </div>
+  </section>
+
+  <section class="result" id="result" hidden>
+    <h2 style="font-size: clamp(34px, 6vw, 44px); font-weight: 800;">Your score: <span id="rScore">0</span> / 16</h2>
+    <div class="scale" role="img" id="scaleImg" aria-label="">
+      <div class="scale-track">
+        <span class="pin" id="marker" style="left: 0%"><span id="pinLabel">You</span></span>
+        <div class="scale-bar">
+          <div class="seg-trap">The Nice Trap</div>
+          <div class="seg-close">Close</div>
+          <div class="seg-ready">Ready for real ears</div>
+        </div>
+      </div>
+      <div class="scale-nums"><span>0 to 6</span><span>7 to 11</span><span>12 to 16</span></div>
+    </div>
+    <div class="band-card" id="bandCard">
+      <span class="range" id="bandRange"></span>
+      <h3 id="bandName"></h3>
+      <p id="bandText"></p>
+    </div>
+
+    <div class="gate" id="gate" hidden>
+      <h2>Now here's what to do about it.</h2>
+      <p class="gate-sub" id="gateSub">I've lined up one fix for every question you scored low on, based on your answers, lowest first. Pop in your name and email and they'll open right here on this page.</p>
+      <form id="gateForm" novalidate>
+        <div>
+          <label for="gName">First name</label>
+          <input id="gName" name="firstName" type="text" autocomplete="given-name" required>
+          <span class="err" id="gNameErr">Enter your first name.</span>
+        </div>
+        <div>
+          <label for="gEmail">Email address</label>
+          <input id="gEmail" name="email" type="email" autocomplete="email" inputmode="email" required>
+          <span class="err" id="gEmailErr">Enter a valid email address.</span>
+        </div>
+        <button type="submit" id="gBtn">Show me my fixes</button>
+        <p class="privacy">Free, no spam. I'll send you songwriting emails, and if they're not for you, unsubscribe any time.</p>
+      </form>
+    </div>
+
+    <div class="fixes-wrap" id="fixesWrap">
+    <p class="confirm" id="confirm" hidden></p>
+    <h2 class="fixes-title" id="fixesTitle">Fix your lowest scores first</h2>
+    <p class="fixes-sub" id="fixesSub">Here's one thing to do tonight for each question that didn't score a 2, lowest first.</p>
+    <div class="fixes" id="fixes"></div>
+    <details class="allfixes" id="allFixesWrap">
+      <summary>See the fix for all 8 questions</summary>
+      <div class="fixes" id="allFixes"></div>
+    </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="recap">
+      <h2>If you only remember three things</h2>
+      <ol>
+        <li><span>1</span>"Nice" usually means the chorus didn't stick. Fix the chorus first.</li>
+        <li><span>2</span>Write for one specific person, in words they'd actually say.</li>
+        <li><span>3</span>Spend more time on your chorus than on any other part of the song.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>Hearing your own chorus fresh</h2>
+    <div class="body">
+      <p>There's one thing this test can't do for you. It can't make you hear your own chorus fresh.</p>
+      <p>Nobody can. You've heard your song a hundred times before anyone else hears it once. You know how the chorus is supposed to feel, so your brain fills in the gaps. That's why "nice" keeps happening, even to good writers.</p>
+      <p>I had success and had no idea how it happened. It took me years to work out why my biggest songs worked: hosting a radio morning show, reading songwriting books, and a challenge where I wrote 30 songs in 30 days. Those songs had been written chorus first. I just didn't know it at the time.</p>
+      <p>That's what I teach in Chorus First Songwriting. The core idea is the North Star principle: the chorus is the destination, and everything else in the song points to it. You also learn to write for a specific listener, so the song lands with someone. It's $297, with a 365-day refund, no questions asked.</p>
+    </div>
+    <div class="cta-row">
+      <div class="signoff">
+        <img src="assets/ricky.png" alt="Ricky" width="68" height="68">
+        <div><span>Go run this on another song tonight.</span><b>Ricky</b></div>
+      </div>
+      <a class="cta" id="ctaBtn" href="https://gigfanatic.com/">See How Chorus First Works
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>This site is not part of the Instagram or Meta website, and is not endorsed by Instagram or Meta in any way.</p>
+    <p>Disclaimer: This scorecard is a self-check, not a guarantee of any result. What you do with it is up to you.</p>
+    <div class="foot-links"><a href="https://gigfanatic.com/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://gigfanatic.com/terms">Terms &amp; Conditions</a></div>
+    <div class="foot-links">© 2026 GigFanatic. All rights reserved.</div>
+  </footer>
+</main>
+
+<script>
+/* =========================================================================
+   CONFIG: GoHighLevel Inbound Webhook trigger URL for the "Nice Test
+   completed" workflow. Leave empty until that workflow exists; the page
+   works fully without it, it just won't tag anyone.
+   ========================================================================= */
+var INBOUND_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/KKRiBSNESqko1Du2FqCH/webhook-trigger/083bef20-343e-4e94-a545-65c071d0f351";
+
+var QUESTIONS = [
+  { q: "Can you say who this song is for in one sentence?",
+    why: "A song written for everybody lands with nobody. My $20,000 album proved that one for me.",
+    fixTitle: "Who it's for",
+    fix: "Finish this sentence before you touch the song again: \"This song is for a ___ who's going through ___.\" If you can't, pick one real person you know and rewrite it for them." },
+  { q: "If someone heard only the chorus, could they tell you what the whole song is about?",
+    why: "The chorus is the destination. If it can't carry the whole idea, the song has no North Star.",
+    fixTitle: "The chorus tells the whole story",
+    fix: "Write the song's whole idea as a text message, ten words or fewer. If your chorus doesn't say that, rewrite the chorus before you touch the verses." },
+  { q: "Could a stranger sing the chorus back after hearing it twice?", stranger: true,
+    why: "A chorus that works has the listener singing along before the song's over.",
+    fixTitle: "A stranger can sing it back",
+    fix: "Play the chorus twice for someone, then ask them to sing it back. Whatever part they drop is the part to simplify or repeat." },
+  { q: "Is the title in the chorus, in the line people will remember?",
+    why: "The chorus words are what people type into a streaming service to find your song.",
+    fixTitle: "The title is in the line people remember",
+    fix: "Circle the chorus line you'd most expect someone to sing in the car. Put your title in that line. If no line jumps out, start there." },
+  { q: "If you hum the chorus with no words, is it still recognisable?",
+    why: "I usually write the melody first. If the tune can't stand on its own, the words are doing all the work.",
+    fixTitle: "The hum test",
+    fix: "Hum the chorus into your phone and listen back tomorrow. If you can't tell it's the chorus, rework the tune before you change a single word." },
+  { q: "Would a listener notice the moment the chorus arrives, without anyone telling them?", stranger: true,
+    why: "The chorus has to stick out from the rest of the song. If it blends in, nobody knows it started.",
+    fixTitle: "People notice when the chorus arrives",
+    fix: "Sing the last line of your verse straight into the chorus. If you can't feel a lift right there, make the chorus start higher or hit harder." },
+  { q: "Would the person this song is for actually say these words out loud?",
+    why: "If they'd never say it, they won't sing it either.",
+    fixTitle: "Words they'd actually say",
+    fix: "Say the chorus out loud as if you're talking to that person across the kitchen table. Rewrite any line that makes you cringe, using the words you'd actually use." },
+  { q: "Do your verses lead to the chorus, or do they wander and hope it shows up?",
+    why: "Verses that wander are a habit from linear songwriting. In a chorus-first song, every verse line points somewhere.",
+    fixTitle: "The verses lead to the chorus",
+    fix: "Go through your verses line by line and ask whether each one moves the listener closer to the chorus. Cut or rewrite any line that's only there to fill space." }
+];
+
+var BANDS = [
+  { key: "trap", min: 0, max: 6, range: "0 TO 6", name: "The Nice Trap",
+    text: "People will be polite, and the chorus is why. I know this spot well, because my $20,000 album lived here. Start with your two lowest scores below, and work on those first." },
+  { key: "close", min: 7, max: 11, range: "7 TO 11", name: "Close",
+    text: "One or two weak spots are holding it back. When my manager picks a song apart these days, I don't take it personally, because the song usually falls short in a couple of very specific, very fixable areas. Find your zeros and ones, fix those, and run the test again." },
+  { key: "ready", min: 12, max: 16, range: "12 TO 16", name: "Ready for real ears",
+    text: "Now find out if strangers agree. Play it for people who don't love you and have no reason to be kind. Their faces will tell you more than this page can." }
+];
+
+var OPTIONS = [ { v: 0, label: "No" }, { v: 1, label: "Sort of" }, { v: 2, label: "Yes" } ];
+var answers = new Array(QUESTIONS.length).fill(null);
+var reported = false;
+var unlocked = false;
+var lead = { name: "", email: "", cid: "" };
+try {
+  lead.email = sessionStorage.getItem("nt_email") || "";
+  lead.cid = sessionStorage.getItem("nt_contact_id") || "";
+  lead.name = sessionStorage.getItem("nt_name") || "";
+} catch (e) {}
+/* People who arrive from Ricky's emails are already on the list: no gate. */
+var knownSubscriber = !!(lead.email || lead.cid);
+if (knownSubscriber) unlocked = true;
+try { if (sessionStorage.getItem("nt_unlocked") === "1") unlocked = true; } catch (e) {}
+
+function el(tag, attrs, text) {
+  var e = document.createElement(tag);
+  if (attrs) for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function buildQuestions() {
+  var form = document.getElementById("quiz");
+  QUESTIONS.forEach(function (item, i) {
+    var fs = el("fieldset", { "class": "q", id: "q" + (i + 1) });
+    var legend = el("legend");
+    var num = el("span", { "class": "q-num", "aria-hidden": "true" }, String(i + 1));
+    var qt = el("span", { "class": "q-text" }, (i + 1) + ". ");
+    qt.textContent = item.q;
+    if (item.stranger) qt.appendChild(el("span", { "class": "stranger" }, "· ask a stranger"));
+    legend.appendChild(qt);
+    fs.appendChild(num);
+    fs.appendChild(legend);
+    fs.appendChild(el("span", { "class": "q-why" }, item.why));
+    var opts = el("div", { "class": "opts" });
+    OPTIONS.forEach(function (o) {
+      var id = "q" + (i + 1) + "v" + o.v;
+      var input = el("input", { type: "radio", name: "q" + (i + 1), id: id, value: String(o.v) });
+      input.addEventListener("change", function () { answer(i, o.v); });
+      var label = el("label", { "for": id });
+      label.appendChild(el("span", { "class": "n" }, String(o.v)));
+      label.appendChild(el("span", null, o.label));
+      opts.appendChild(input);
+      opts.appendChild(label);
+    });
+    fs.appendChild(opts);
+    form.appendChild(fs);
+  });
+}
+
+function bandFor(score) {
+  for (var i = 0; i < BANDS.length; i++) if (score >= BANDS[i].min && score <= BANDS[i].max) return BANDS[i];
+  return BANDS[0];
+}
+
+function fixCard(i, scored) {
+  var item = QUESTIONS[i];
+  var card = el("div", { "class": "fix" });
+  var head = el("div", { "class": "fix-head" });
+  head.appendChild(el("span", { "class": "n" }, String(i + 1)));
+  head.appendChild(el("h4", null, item.fixTitle));
+  if (scored != null) head.appendChild(el("span", { "class": "got" }, "You scored " + scored));
+  card.appendChild(head);
+  var p = el("p");
+  p.appendChild(el("strong", null, "Do this: "));
+  p.appendChild(document.createTextNode(item.fix));
+  card.appendChild(p);
+  return card;
+}
+
+function answer(i, v) {
+  answers[i] = v;
+  document.getElementById("q" + (i + 1)).classList.add("done");
+  var answered = answers.filter(function (a) { return a !== null; }).length;
+  var total = answers.reduce(function (s, a) { return s + (a || 0); }, 0);
+  document.getElementById("count").textContent = answered === QUESTIONS.length ? "All 8 answered" : answered + " of 8 answered";
+  document.getElementById("total").textContent = total;
+  if (answered === QUESTIONS.length) showResult(total);
+}
+
+function showResult(total) {
+  var band = bandFor(total);
+  var res = document.getElementById("result");
+  var firstReveal = res.hidden;
+  res.hidden = false;
+  document.getElementById("rScore").textContent = total;
+  document.getElementById("marker").style.left = Math.max(3, Math.min(97, (total + 0.5) / 17 * 100)) + "%";
+  document.getElementById("pinLabel").textContent = "You: " + total;
+  document.getElementById("scaleImg").setAttribute("aria-label", "Your score of " + total + " out of 16 is in the " + band.name + " band.");
+  var card = document.getElementById("bandCard");
+  card.className = "band-card " + band.key;
+  document.getElementById("bandRange").textContent = band.range;
+  document.getElementById("bandName").textContent = band.name;
+  document.getElementById("bandText").textContent = band.text;
+
+  var weak = answers.map(function (a, i) { return { i: i, a: a }; })
+    .filter(function (x) { return x.a < 2; })
+    .sort(function (x, y) { return x.a - y.a || x.i - y.i; });
+  var fixes = document.getElementById("fixes");
+  fixes.innerHTML = "";
+  weak.forEach(function (x) { fixes.appendChild(fixCard(x.i, x.a)); });
+  if (!weak.length) {
+    document.getElementById("fixesTitle").textContent = "Nothing scored below a 2";
+    document.getElementById("fixesSub").textContent = "That's rare. Now go and test it on strangers. If you want, the fixes for all 8 are below for your next song.";
+  } else {
+    document.getElementById("fixesTitle").textContent = "Fix your lowest scores first";
+    document.getElementById("fixesSub").textContent = "Here's one thing to do tonight for each question that didn't score a 2, lowest first.";
+  }
+  var all = document.getElementById("allFixes");
+  if (!all.childNodes.length) QUESTIONS.forEach(function (_, i) { all.appendChild(fixCard(i, null)); });
+
+  document.getElementById("gateSub").textContent = weak.length
+    ? "I've lined up one fix for every question you scored low on, based on your answers, lowest first. Pop in your name and email and they'll open right here on this page."
+    : "You answered Yes on every question. Pop in your name and email and I'll open the fixes for all 8, ready for your next song.";
+  document.getElementById("gate").hidden = unlocked;
+  document.getElementById("fixesWrap").hidden = !unlocked;
+
+  if (firstReveal) {
+    setTimeout(function () { res.scrollIntoView({ behavior: "smooth", block: "start" }); }, 250);
+  }
+  if (unlocked) report(total, band);
+}
+
+/* Tell GHL this person finished the test (once per visit), so the workflow
+   can tag them. Only sends when we know who they are from the email link. */
+function report(total, band) {
+  if (reported) return;
+  reported = true;
+  var email = lead.email, cid = lead.cid;
+
+  whenSeline(function (seline) {
+    seline.track("lead magnet: nice test completed", { lead_magnet: "nice-test", score: total, band: band.key });
+  });
+
+  if (!INBOUND_WEBHOOK_URL || (!email && !cid)) return;
+  var payload = {
+    "First Name": lead.name,
+    "Email Address": email,
+    "new_lead": knownSubscriber ? "no" : "yes",
+    "contact_id": cid,
+    "source": "Nice Test",
+    "nice_test_score": total,
+    "nice_test_band": band.name,
+    "nice_test_band_key": band.key
+  };
+  answers.forEach(function (a, i) { payload["Q" + (i + 1)] = a; });
+  fetch(INBOUND_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(function () { /* never get in the way of the results */ });
+}
+
+document.getElementById("gateForm").addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  var name = document.getElementById("gName").value.trim();
+  var email = document.getElementById("gEmail").value.trim();
+  var okName = name.length > 0;
+  var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  document.getElementById("gNameErr").classList.toggle("on", !okName);
+  document.getElementById("gEmailErr").classList.toggle("on", !okEmail);
+  if (!okName) { document.getElementById("gName").focus(); return; }
+  if (!okEmail) { document.getElementById("gEmail").focus(); return; }
+
+  lead.name = name; lead.email = email; unlocked = true;
+  try {
+    sessionStorage.setItem("nt_name", name);
+    sessionStorage.setItem("nt_email", email);
+    sessionStorage.setItem("nt_unlocked", "1");
+  } catch (e) {}
+  whenSeline(function (seline) {
+    seline.setUser({ email: email, name: name, source: "nice-test" });
+    seline.track("optin: nice test", { lead_magnet: "nice-test" });
+  });
+
+  var total = answers.reduce(function (s, a) { return s + (a || 0); }, 0);
+  var weakCount = answers.filter(function (a) { return a < 2; }).length;
+  var c = document.getElementById("confirm");
+  c.textContent = weakCount
+    ? "Here you go, " + name + ". Start at the top. That's the one costing you most."
+    : "Here you go, " + name + ". These are ready for your next song.";
+  c.hidden = false;
+  showResult(total);
+  if (!weakCount) document.getElementById("allFixesWrap").open = true;
+  document.getElementById("fixesWrap").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("ctaBtn").addEventListener("click", function () {
+  whenSeline(function (seline) { seline.track("lead magnet: nice test cta click", { lead_magnet: "nice-test" }); });
+});
+
+buildQuestions();
+</script>
+</body>
+</html>
